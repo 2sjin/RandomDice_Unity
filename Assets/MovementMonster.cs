@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovementMonster : MonoBehaviour {
     [SerializeField] Vector3 direction = Vector3.zero;
-    [SerializeField] float moveSpeed; 
+    [SerializeField] float moveSpeed;
 
     void Start() {
         direction = Vector3.up;
@@ -12,6 +12,13 @@ public class MovementMonster : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (transform.position.y >= 1) {
+            if (transform.position.x >= 2)
+                direction = Vector3.down;
+            else
+                direction = Vector3.right;
+        }
+
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
