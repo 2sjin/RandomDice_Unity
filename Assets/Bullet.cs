@@ -19,16 +19,16 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if (transform.position.x > 3 || transform.position.y < -3 ||
-            transform.position.y > 2 || transform.position.y < -2)
+        // 총알이 일정 범위를 벗어나면 제거
+        if (isOutOfRange(transform.position))
             Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Monster") {
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-            gameManager.GetComponent<GameManager>().removeMonster(other.gameObject);
-        }
+    // 총알이 일정 범위 밖으로 벗어나면 true 리턴
+    private bool isOutOfRange(Vector3 pos) {
+        if (pos.x > 3 || pos.y < -3 || pos.y > 2 || pos.y < -2)
+            return true;
+        return false;
     }
+    
 }
