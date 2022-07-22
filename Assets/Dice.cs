@@ -37,4 +37,11 @@ public class Dice : MonoBehaviour {
         // 레이어 순서 원래대로
         GetComponent<SpriteRenderer>().sortingOrder -= 1;
     }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.tag == "Dice") {
+            Debug.Log("합성!");
+        }
+    }
+
 }
