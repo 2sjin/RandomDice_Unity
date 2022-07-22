@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-    [SerializeField] private GameObject gameManager;
+    [SerializeField] private GameObject monsterManager;
     [SerializeField] private GameObject monsterPrefab;
     private float time = 0.0f;
 
@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour {
         time += Time.deltaTime;
         if (time >= 1.0f) {
             GameObject newMonster = Instantiate(monsterPrefab);
-            gameManager.GetComponent<GameManager>().addMonster(newMonster);
+            monsterManager.GetComponent<MonsterManager>().addMonster(newMonster);
             time = 0.0f;
         }
         

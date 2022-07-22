@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-    private GameObject gameManager;
+    private GameObject monsterManager;
     
     void Start() {
-        gameManager = GameObject.Find("GameManager");
+        monsterManager = GameObject.Find("MonsterManager");
     }
 
     void Update() {
         try {
-            GameObject targetMonster = gameManager.GetComponent<GameManager>().monsterList[0];
+            GameObject targetMonster = monsterManager.GetComponent<MonsterManager>().monsterList[0];
             Vector3 targetPosition = targetMonster.transform.position; 
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, 10 * Time.deltaTime);
         } catch(ArgumentOutOfRangeException e) {

@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &81797947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 81797949}
+  - component: {fileID: 81797948}
+  m_Layer: 0
+  m_Name: DiceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &81797948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81797947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f28b39f9f6e9e4c89225a497c51c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dicePrefab: {fileID: 1343807701171500194, guid: 6b48c10a4d28a6541818607e255be1f6, type: 3}
+  diceArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!4 &81797949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81797947}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.108424984, y: -0.50504386, z: -0.008614594}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &156416463
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +251,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &478971745
 GameObject:
@@ -392,8 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3d8795167d4fd42be22d466a659250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 885809106}
-  dicePrefab: {fileID: 1343807701171500194, guid: 6b48c10a4d28a6541818607e255be1f6, type: 3}
+  diceManager: {fileID: 81797947}
 --- !u!212 &549169754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -459,7 +519,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &549169756
 Rigidbody2D:
@@ -599,7 +659,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!1 &885809106
+--- !u!1 &874484305
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -607,58 +667,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 885809108}
-  - component: {fileID: 885809107}
+  - component: {fileID: 874484307}
+  - component: {fileID: 874484306}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: MonsterManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &885809107
+--- !u!114 &874484306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885809106}
+  m_GameObject: {fileID: 874484305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1c6016f1f8144247a64a4c3c6d9a094, type: 3}
+  m_Script: {fileID: 11500000, guid: df2e9c0605157134fb835ed344e65b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monsterList: []
-  diceArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!4 &885809108
+--- !u!4 &874484307
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885809106}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.026769476, y: -0.19229046, z: -0.14986736}
+  m_GameObject: {fileID: 874484305}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.108424984, y: -0.50504386, z: -0.008614594}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &934780915
 GameObject:
@@ -774,7 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4b6719d7e7b814e99258c3e4115477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 885809106}
+  monsterManager: {fileID: 874484305}
   monsterPrefab: {fileID: 3582636678796738027, guid: d4a3a7cb8d2f7bf4caccab0f72dbd100, type: 3}
 --- !u!1 &1152485459
 GameObject:
@@ -890,7 +934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32fb2f334570b514aa766c95b72f100c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 885809106}
+  monsterManager: {fileID: 874484305}
 --- !u!1 &1155710431
 GameObject:
   m_ObjectHideFlags: 0

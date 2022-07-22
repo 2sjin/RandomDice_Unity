@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementMonster : MonoBehaviour {
-    private GameObject gameManager;
+public class Monster : MonoBehaviour {
+    private GameObject monsterManager;
     [SerializeField] private Vector3 direction = Vector3.zero;
     [SerializeField] private float moveSpeed;
     [SerializeField] private int hp;
 
     void Start() {
-        gameManager = GameObject.Find("GameManager");
+        monsterManager = GameObject.Find("MonsterManager");
         direction = Vector3.up;     // 몬스터의 초기 방향은 위쪽
     }
 
@@ -25,9 +25,10 @@ public class MovementMonster : MonoBehaviour {
         // 체력이 0 이하이면 몬스터 제거
         if (hp <= 0) {
             Destroy(gameObject);      // 몬스터 오브젝트 제거
-            gameManager.GetComponent<GameManager>().removeMonster(gameObject);  // 몬스터 리스트에서 몬스터 제거
+            monsterManager.GetComponent<MonsterManager>().removeMonster(gameObject);  // 몬스터 리스트에서 몬스터 제거
         }
 
+        // 몬스터 이동
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
