@@ -1,14 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class Dice : MonoBehaviour {
     [SerializeField] private GameObject gameManager;
     [SerializeField] private GameObject bulletPrefab;
     private float attackTime = 0.0f;
-
 
     void Update() {
         Attack();
@@ -21,4 +17,10 @@ public class Dice : MonoBehaviour {
             attackTime = 0.0f;
         }
     }
+
+    private void OnMouseDrag() {
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = pos;
+    }
+
 }
