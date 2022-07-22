@@ -6,7 +6,9 @@ public class Dice : MonoBehaviour {
     [SerializeField] private GameObject bulletPrefab;
     private float attackTime = 0.0f;    // 공격 주기(초)
     private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치)
-    
+
+    private bool isTrigger = false;
+
     void Start() {
         diceManager = GameObject.Find("DiceManager");
     }
@@ -21,6 +23,30 @@ public class Dice : MonoBehaviour {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             attackTime = 0.0f;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        isTrigger = true;  
+        if (other.tag == "Dice" && !Input.GetMouseButton(0)) {
+            DiceManager diceManagerScript = diceManager.GetComponent<DiceManager>();
+
+            // 합성할 두 주사위의 배열 인덱스 구하기
+            int gameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
+            int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, other.gameObject);
+            // 배열에서 주사위 제거(null 값으로 변경)
+            diceManagerScript.diceArray[gameObjectIndex] = null;
+            diceManagerScript.diceArray[otherGameObjectIndex] = null;
+            // 주사위 오브젝트 제거
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+
+            // 새로운 주사위 1개 생성
+            diceManagerScript.createDice(otherGameObjectIndex);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        isTrigger = false;
     }
 
     private void OnMouseDown() {
@@ -38,30 +64,12 @@ public class Dice : MonoBehaviour {
     }
 
     private void OnMouseUp() {
-        // 주사위 원위치
-        transform.position = currentPosition;
-        // 레이어 순서 원래대로
-        GetComponent<SpriteRenderer>().sortingOrder -= 1;
-        tag = "Dice";
-    }
-
-    // 다음 코드는 한 번만 작성하였지만, 합성할 양쪽 주사위에 대한 트리거가 모두 실행됨
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other.tag == "Dice") {
-            DiceManager diceManagerScript = diceManager.GetComponent<DiceManager>();
-
-            // 합성할 두 주사위의 배열 인덱스 구하기
-            int gameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
-            int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, other.gameObject);
-            // 배열에서 주사위 제거(null 값으로 변경)  
-            diceManagerScript.diceArray[gameObjectIndex] = null;
-            diceManagerScript.diceArray[otherGameObjectIndex] = null;
-            // 주사위 오브젝트 제거
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-
-            // 새로운 주사위 생성
-            diceManagerScript.createDice(otherGameObjectIndex);
+        if (!isTrigger) {   // 주사위 합성 트리거가 실행 중이 아닐 경우
+            // 주사위 원위치
+            transform.position = currentPosition;
+            // 레이어 순서 원래대로
+            GetComponent<SpriteRenderer>().sortingOrder -= 1;
+            tag = "Dice";
         }
     }
 }
