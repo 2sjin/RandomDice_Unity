@@ -4,11 +4,12 @@ using UnityEngine;
 public class Dice : MonoBehaviour {
     private GameObject diceManager;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject levelText;
+    [SerializeField] public GameObject levelText;
     private float attackTime = 0.0f;    // 공격 주기(초)
     private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치)
     private Collider2D colliderDice;
     [SerializeField] private int level = 1;
+    [SerializeField] public int type = 0;
 
     private bool isTrigger = false;
 
@@ -20,6 +21,7 @@ public class Dice : MonoBehaviour {
     private void Update() {
         updateLevelText();
         attack();
+        diceManager.GetComponent<DiceManager>().applyDiceType(gameObject);
     }
 
     // 기본 공격
@@ -98,6 +100,10 @@ public class Dice : MonoBehaviour {
         if (level != other.GetComponent<Dice>().level || level >= 7)
             return;
 
+        // 두 주사위의 종류가 다를 경우 합성 없이 리턴
+        if (type != other.GetComponent<Dice>().type)
+            return;
+
         // 배열에서 주사위 제거(null 값으로 변경)
         try {
             diceManagerScript.diceArray[gameObjectIndex] = null;
@@ -118,10 +124,5 @@ public class Dice : MonoBehaviour {
         diceManagerScript.createDice(otherGameObjectIndex, level+1);
     }
 }
-
-
-
-
-
 
 

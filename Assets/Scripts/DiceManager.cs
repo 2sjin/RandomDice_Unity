@@ -10,7 +10,11 @@ public class DiceManager : MonoBehaviour {
     float marginX = 0.7f;   // X 간격
     float marginY = 0.7f;   // Y 간격
 
-    public GameObject [] diceArray = new GameObject[15];      // 주사위 배열
+    [SerializeField] public GameObject [] diceArray = new GameObject[15];      // 주사위 배열
+
+    [SerializeField] private Sprite [] sprite = new Sprite[5];
+    [SerializeField] private Color [] color = new Color[5];
+
 
     void Start() {
         for (int i=0; i<15; i++) {
@@ -42,5 +46,15 @@ public class DiceManager : MonoBehaviour {
 
         // 새로 생성한 주사위 레벨 설정
         diceArray[diceIndex].GetComponent<Dice>().setLevel(level);
+
+        // 새로 생성한 주사위 종류 설정(0~4)
+        diceArray[diceIndex].GetComponent<Dice>().type = Random.Range(0, 5);
+    }
+
+    // 
+    public void applyDiceType(GameObject dice) {
+        int type = dice.GetComponent<Dice>().type;
+        dice.GetComponent<SpriteRenderer>().sprite = sprite[type];
+        dice.GetComponent<Dice>().levelText.GetComponent<TextMesh>().color = color[type];
     }
 }
