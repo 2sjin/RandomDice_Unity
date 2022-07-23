@@ -51,7 +51,7 @@ public class Monster : MonoBehaviour {
      }
 
      // 몬스터 사망 처리
-     private void die() {
+     public void die() {
         Destroy(gameObject);      // 몬스터 오브젝트 제거
         Destroy(hpText);          // HpText 오브젝트 제거
         monsterManager.GetComponent<MonsterManager>().removeMonster(gameObject);  // 몬스터 리스트에서 몬스터 제거
