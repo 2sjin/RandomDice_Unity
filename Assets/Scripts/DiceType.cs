@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DiceType : MonoBehaviour {
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
+    public int id;
+    public Color32 color;
 
-    // Update is called once per frame
-    void Update() {
-        
+    public DiceType(int id, Color32 color) {
+        this.id = id;
+        this.color = color;
     }
 }

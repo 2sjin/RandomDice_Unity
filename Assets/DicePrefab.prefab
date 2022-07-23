@@ -103,12 +103,6 @@ MonoBehaviour:
   levelText: {fileID: 6272834493684605787, guid: ade13f5f91978294ea95a975fdcd3ea5, type: 3}
   level: 1
   type: 0
-  sprite:
-  - {fileID: 21300000, guid: b62b2fb6f0465224aa511d971903636a, type: 3}
-  - {fileID: 21300000, guid: b0c77f1358d59ad45953f63a5481a085, type: 3}
-  - {fileID: 21300000, guid: 22fab48fa59b6c3488af18e02266bbb5, type: 3}
-  - {fileID: 21300000, guid: 48c9910d84ed1b74d815bd9111351c99, type: 3}
-  - {fileID: 21300000, guid: 45e62ba2967ad614792d9d3642755c03, type: 3}
 --- !u!61 &7296009091385390012
 BoxCollider2D:
   m_ObjectHideFlags: 0

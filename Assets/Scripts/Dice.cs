@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Dice : MonoBehaviour {
     private GameObject diceManager;
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] public GameObject bulletPrefab;
     [SerializeField] public GameObject levelText;
     private float attackTime = 0.0f;    // 공격 주기(초)
     private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치)
