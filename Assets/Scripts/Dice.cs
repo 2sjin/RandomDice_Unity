@@ -3,33 +3,45 @@ using UnityEngine;
 
 public class Dice : MonoBehaviour {
     private GameObject diceManager;
-    [SerializeField] public GameObject bulletPrefab;
-    [SerializeField] public GameObject levelText;
-    private float attackTime = 0.0f;    // 공격 주기(초)
+    private GameObject monsterManager;
+
+    public GameObject bulletPrefab;
+    public GameObject levelText;
+
+    public int level = 1;
+    public DiceInfo diceInfo;
+
+    private float attackCooltime = 0.0f;    // 공격 주기(초)
     private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치)
     private Collider2D colliderDice;
-    [SerializeField] private int level = 1;
-    [SerializeField] public int type = 0;
-
     private bool isTrigger = false;
 
     private void Start() {
         diceManager = GameObject.Find("DiceManager");
+        monsterManager = GameObject.Find("MonsterManager");
         levelText = Instantiate(levelText);
     }
 
     private void Update() {
         updateLevelText();
-        attack();
         diceManager.GetComponent<DiceManager>().applyDiceType(gameObject);
+
+        attackCooltime += Time.deltaTime;
+        if (attackCooltime >= diceInfo.attackSpeed) {
+            attack();
+            attackCooltime = 0.0f;
+        }
+
     }
 
     // 기본 공격
     private void attack() {
-        attackTime += Time.deltaTime;
-        if (attackTime >= 0.5f) {
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            attackTime = 0.0f;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().diceInfo = diceInfo;  // 주사위 정보 전달
+        bullet.GetComponent<Bullet>().targetIndex = 0;      // 타겟 인덱스 전달
+        if (diceInfo.target == "random") {   // 랜덤일 경우의 타겟 인덱스 전달
+            int monsterCount = monsterManager.GetComponent<MonsterManager>().monsterList.Count;
+            bullet.GetComponent<Bullet>().targetIndex = UnityEngine.Random.Range(0, monsterCount);
         }
     }
 
@@ -101,7 +113,7 @@ public class Dice : MonoBehaviour {
             return;
 
         // 두 주사위의 종류가 다를 경우 합성 없이 리턴
-        if (type != other.GetComponent<Dice>().type)
+        if (diceInfo != other.GetComponent<Dice>().diceInfo)
             return;
 
         // 배열에서 주사위 제거(null 값으로 변경)

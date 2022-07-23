@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9254902, g: 0.69803923, b: 0.21176471, a: 1}
+  m_Color: {r: 0.007843138, g: 0.5568628, b: 0.8784314, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a73ef7585cee842a2aeb9b7e7e7293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceType: {fileID: 0}
 --- !u!58 &5928424787938683415
 CircleCollider2D:
   m_ObjectHideFlags: 0
