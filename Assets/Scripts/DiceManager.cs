@@ -19,7 +19,7 @@ public class DiceManager : MonoBehaviour {
     }
 
     // 주사위 생성
-    public void createDice(int index) {
+    public void createDice(int index, int level) {
         int diceSize = diceArray.Length;
         int diceIndex = index;
         List<int> nullIndexList = new List<int>();
@@ -39,5 +39,8 @@ public class DiceManager : MonoBehaviour {
         float newDicePosY = -marginY * (int)(diceIndex / 5) + firstPosY;
         diceArray[diceIndex]
             = Instantiate(dicePrefab, new Vector3(newDicePosX, newDicePosY, 0), Quaternion.identity);        
+
+        // 새로 생성한 주사위 레벨 설정
+        diceArray[diceIndex].GetComponent<Dice>().setLevel(level);
     }
 }

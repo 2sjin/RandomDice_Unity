@@ -4,20 +4,24 @@ using UnityEngine;
 public class Dice : MonoBehaviour {
     private GameObject diceManager;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject levelText;
     private float attackTime = 0.0f;    // 공격 주기(초)
     private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치)
+    [SerializeField] private int level = 1;
 
     private bool isTrigger = false;
 
-    void Start() {
+    private void Start() {
         diceManager = GameObject.Find("DiceManager");
+        levelText = Instantiate(levelText);
     }
 
-    void Update() {
+    private void Update() {
+        updateLevelText();
         Attack();
     }
 
-    void Attack() {
+    private void Attack() {
         attackTime += Time.deltaTime;
         if (attackTime >= 0.5f) {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
@@ -25,6 +29,20 @@ public class Dice : MonoBehaviour {
         }
     }
 
+    // LevelText 갱신
+    private void updateLevelText() {
+        levelText.GetComponent<TextMesh>().text = level.ToString();
+        levelText.transform.position = transform.position;
+    }
+
+    // 레벨 설정
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // 주사위 합성
     private void OnTriggerStay2D(Collider2D other) {
         isTrigger = true;
         if (other.tag == "Dice" && !Input.GetMouseButton(0)) {
@@ -39,9 +57,12 @@ public class Dice : MonoBehaviour {
             // 주사위 오브젝트 제거
             Destroy(gameObject);
             Destroy(other.gameObject);
+            // 주사위 LevelText 오브젝트 제거
+            Destroy(GetComponent<Dice>().levelText);
+            Destroy(other.GetComponent<Dice>().levelText);
 
             // 새로운 주사위 1개 생성
-            diceManagerScript.createDice(otherGameObjectIndex);
+            diceManagerScript.createDice(otherGameObjectIndex, level+1);
         }
     }
 
