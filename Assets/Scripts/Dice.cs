@@ -26,7 +26,7 @@ public class Dice : MonoBehaviour {
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        isTrigger = true;  
+        isTrigger = true;
         if (other.tag == "Dice" && !Input.GetMouseButton(0)) {
             DiceManager diceManagerScript = diceManager.GetComponent<DiceManager>();
 
