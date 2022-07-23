@@ -18,10 +18,11 @@ public class Dice : MonoBehaviour {
 
     private void Update() {
         updateLevelText();
-        Attack();
+        attack();
     }
 
-    private void Attack() {
+    // 기본 공격
+    private void attack() {
         attackTime += Time.deltaTime;
         if (attackTime >= 0.5f) {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
@@ -51,9 +52,16 @@ public class Dice : MonoBehaviour {
             // 합성할 두 주사위의 배열 인덱스 구하기
             int gameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
             int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, other.gameObject);
+
             // 배열에서 주사위 제거(null 값으로 변경)
-            diceManagerScript.diceArray[gameObjectIndex] = null;
-            diceManagerScript.diceArray[otherGameObjectIndex] = null;
+            try {
+                diceManagerScript.diceArray[gameObjectIndex] = null;
+                diceManagerScript.diceArray[otherGameObjectIndex] = null;
+            } catch(IndexOutOfRangeException e) {
+                isTrigger = false;
+                return;
+            }
+
             // 주사위 오브젝트 제거
             Destroy(gameObject);
             Destroy(other.gameObject);
