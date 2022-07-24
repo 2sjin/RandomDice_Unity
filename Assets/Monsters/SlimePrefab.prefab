@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3582636678796738024}
   - component: {fileID: 3582636678796738025}
   - component: {fileID: 3582636678796738026}
+  - component: {fileID: -619391248615829403}
   - component: {fileID: 3582636678796737942}
   - component: {fileID: 3582636678796737943}
   m_Layer: 0
@@ -99,11 +100,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8559ab6392b3f54e830ce5de0d6d672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statusManager: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   moveSpeed: 1
   hp: 100
   hpText: {fileID: 6576854778607884144, guid: 94de9c564844ee74bbfe7c421181227c, type: 3}
+--- !u!114 &-619391248615829403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582636678796738027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509a0a527d34f0e44bd46963cc979545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   isPoison: 0
+  poisonDamage: 0
+  isFreeze: 0
+  freezeEffect: 0
 --- !u!58 &3582636678796737942
 CircleCollider2D:
   m_ObjectHideFlags: 0

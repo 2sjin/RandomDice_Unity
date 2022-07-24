@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : MonoBehaviour {
     private GameObject monsterManager;
+
     [SerializeField] private Vector3 direction = Vector3.zero;
     [SerializeField] public float moveSpeed;
     [SerializeField] public int hp;
     [SerializeField] private GameObject hpText;
-
-    public bool isPoison = false;
-    public bool isFreeze = false;
 
     private void Start() {
         monsterManager = GameObject.Find("MonsterManager");

@@ -42,19 +42,12 @@ public class Bullet : MonoBehaviour {
                     fire.GetComponent<Fire>().damage = diceInfo.special[0];
                     break;
                 case 2:     // 독 주사위
-                    if (!monster.isPoison) {
-                        GameObject poison = Instantiate(skillManager.skillList[2]);
-                        poison.transform.position = transform.position;
-                        poison.GetComponent<Poison>().damage = diceInfo.special[0];
-                        monster.isPoison = true;
-                    }
+                    monster.GetComponent<StatusManager>().poisonDamage = diceInfo.special[0];
+                    monster.GetComponent<StatusManager>().isPoison = true;
                     break;
                 case 4:     // 얼음 주사위
-                    if (!monster.isFreeze) {
-                        monster.moveSpeed = 1 - (diceInfo.special[0] * 0.01f);
-                        monster.isFreeze = true;
-                    }
-
+                    monster.GetComponent<StatusManager>().freezeEffect = diceInfo.special[0];
+                    monster.GetComponent<StatusManager>().isFreeze = true;
                     break;
             }
         }
