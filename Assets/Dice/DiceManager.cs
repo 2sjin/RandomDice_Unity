@@ -25,7 +25,7 @@ public class DiceManager : MonoBehaviour {
         deckArray[1] = new DiceInfo(1, 30, 0.7f, "front", 30, 0, 0, new Color32(236, 178, 54, 255));
         deckArray[2] = new DiceInfo(2, 20, 1.3f, "random", 50, 0, 0, new Color32(56, 181, 4, 255));
         deckArray[3] = new DiceInfo(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255));
-        deckArray[4] = new DiceInfo(4, 30, 1.5f, "front", 5, 0, 0, new Color32(2, 142, 224, 255));
+        deckArray[4] = new DiceInfo(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255));
     }
 
     // 주사위 생성

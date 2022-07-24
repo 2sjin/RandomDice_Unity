@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Dice
   - SelectedDice
+  - Skill
   layers:
   - Default
   - TransparentFX

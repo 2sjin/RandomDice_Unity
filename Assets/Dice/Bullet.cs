@@ -49,6 +49,13 @@ public class Bullet : MonoBehaviour {
                         monster.isPoison = true;
                     }
                     break;
+                case 4:     // 얼음 주사위
+                    if (!monster.isFreeze) {
+                        monster.moveSpeed = 1 - (diceInfo.special[0] * 0.01f);
+                        monster.isFreeze = true;
+                    }
+
+                    break;
             }
         }
      }

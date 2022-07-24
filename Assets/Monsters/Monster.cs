@@ -5,11 +5,12 @@ using UnityEngine;
 public class Monster : MonoBehaviour {
     private GameObject monsterManager;
     [SerializeField] private Vector3 direction = Vector3.zero;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] public float moveSpeed;
     [SerializeField] public int hp;
     [SerializeField] private GameObject hpText;
 
     public bool isPoison = false;
+    public bool isFreeze = false;
 
     private void Start() {
         monsterManager = GameObject.Find("MonsterManager");
@@ -30,7 +31,7 @@ public class Monster : MonoBehaviour {
     }
 
     // 몬스터 이동
-     private void move() {        
+     private void move() {
         if (transform.position.y >= monsterManager.GetComponent<MonsterManager>().corner1_Y) {
             if (transform.position.x >= monsterManager.GetComponent<MonsterManager>().corner2_X)
                 direction = Vector3.down;   // 두 번째 모퉁이를 만났을 때의 방향 전환
@@ -42,6 +43,7 @@ public class Monster : MonoBehaviour {
 
      // 몬스터 사망 처리
      public void die() {
+        hp = 0;
         Destroy(gameObject);      // 몬스터 오브젝트 제거
         Destroy(hpText);          // HpText 오브젝트 제거
         monsterManager.GetComponent<MonsterManager>().removeMonster(gameObject);  // 몬스터 리스트에서 몬스터 제거

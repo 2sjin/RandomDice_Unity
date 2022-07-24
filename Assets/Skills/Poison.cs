@@ -14,15 +14,13 @@ public class Poison : MonoBehaviour {
                 other.GetComponent<Monster>().hp -= (int) damage;
                 time = 0.0f;
             }
-
-        // 독 중첩 불가
-        if (other.name == "Poison(Clone)")
-            Destroy(gameObject);
-
+            if (other.GetComponent<Monster>().hp <= 0)
+                Destroy(gameObject);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        Destroy(gameObject);
+        if (other.tag == "Monster")
+            Destroy(gameObject);
     }
 }

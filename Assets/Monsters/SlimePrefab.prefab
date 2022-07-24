@@ -101,8 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0, z: 0}
   moveSpeed: 1
-  hp: 300
+  hp: 100
   hpText: {fileID: 6576854778607884144, guid: 94de9c564844ee74bbfe7c421181227c, type: 3}
+  isPoison: 0
 --- !u!58 &3582636678796737942
 CircleCollider2D:
   m_ObjectHideFlags: 0
