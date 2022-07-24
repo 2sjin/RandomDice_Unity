@@ -22,12 +22,16 @@ public class DiceManager : MonoBehaviour {
 
         // 테스트용 코드(주사위 덱 불러오기)
 //        deckArray[0] = new DiceInfo.DiceStruct(0, 20, 0.8f, "front", 20, 0, 0, new Color32(215, 32, 56, 255));      // 불
-//        deckArray[1] = new DiceInfo.DiceStruct(1, 30, 0.7f, "front", 30, 0, 0, new Color32(236, 178, 54, 255));     // 전기
-        deckArray[0] = new DiceInfo.DiceStruct(2, 20, 1.3f, "random", 50, 0, 0, new Color32(56, 181, 4, 255));      // 독
-        deckArray[1] = new DiceInfo.DiceStruct(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255));     // 바람
-        deckArray[2] = new DiceInfo.DiceStruct(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255));      // 얼음
-        deckArray[3] = new DiceInfo.DiceStruct(5, 50, 0.9f, "random", 0, 0, 0, new Color32(170, 0, 255, 255));     // 고장난
-        deckArray[4] = new DiceInfo.DiceStruct(6, 7, 1.0f, "front", 0, 0, 0, new Color32(104, 0, 255, 255));     // 도박
+//        deckArray[0] = new DiceInfo.DiceStruct(1, 30, 0.7f, "front", 30, 0, 0, new Color32(236, 178, 54, 255));     // 전기
+//        deckArray[0] = new DiceInfo.DiceStruct(2, 20, 1.3f, "random", 50, 0, 0, new Color32(56, 181, 4, 255), "Common", 2);      // 독
+//        deckArray[0] = new DiceInfo.DiceStruct(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255), "Common", 4);      // 얼음
+//        deckArray[0] = new DiceInfo.DiceStruct(5, 50, 0.9f, "random", 0, 0, 0, new Color32(170, 0, 255, 255), "Common", 5);     // 고장난
+        
+        deckArray[0] = new DiceInfo.DiceStruct(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255), "Common", 3);    // 바람
+        deckArray[1] = new DiceInfo.DiceStruct(6, 7, 1.0f, "front", 0, 0, 0, new Color32(104, 0, 255, 255), "Common", 6);       // 도박
+        deckArray[2] = new DiceInfo.DiceStruct(7, 30, 1.0f, "front", 40, 0, 0, new Color32(162, 106, 52, 255), "Rare", 0);        // 도성
+        deckArray[3] = new DiceInfo.DiceStruct(8, 8, 2.0f, "front", 7, 60, 0, new Color32(192, 141, 231, 255), "Unique", 0);      // 고성
+        deckArray[4] = new DiceInfo.DiceStruct(9, 10, 2.0f, "front", 10, 0, 0, new Color32(53, 24, 93, 255), "Legendary", 0);   // 성장
     }
 
     // 주사위 생성
@@ -56,14 +60,38 @@ public class DiceManager : MonoBehaviour {
         diceArray[diceIndex].GetComponent<Dice>().diceStruct = deckArray[Random.Range(0, 5)];
 
         // 새로 생성한 주사위 레벨 설정
-        diceArray[diceIndex].GetComponent<Dice>().setLevel(level);
+        diceArray[diceIndex].GetComponent<Dice>().diceStruct.level = level;
     }
 
     // 
-    public void applyDiceType(GameObject dice) {
-        Dice diceScript = dice.GetComponent<Dice>();
+    public void applyDiceSprite(GameObject dice, string rarity, int index) {
+        DiceSprites diceSpritesScript = GetComponent<DiceSprites>();
+        List<Sprite> SpriteList;
 
-        dice.GetComponent<SpriteRenderer>().sprite = GetComponent<DiceSpriteManager>().spriteList[diceScript.diceStruct.id];
+        switch(rarity) {
+            case "Common":
+                SpriteList = diceSpritesScript.Common;
+                break;
+            case "Rare":
+                SpriteList = diceSpritesScript.Rare;
+                break;
+            case "Unique":
+                SpriteList = diceSpritesScript.Unique;
+                break;
+            case "Legendary":
+                SpriteList = diceSpritesScript.Legendary;
+                break;
+            default:
+                SpriteList = diceSpritesScript.Common;
+                break;
+        }
+
+        Dice diceScript = dice.GetComponent<Dice>();
+        dice.GetComponent<SpriteRenderer>().sprite = SpriteList[index];
+    }
+
+    public void applyDiceColor(GameObject dice) {
+        Dice diceScript = dice.GetComponent<Dice>();
         diceScript.levelText.GetComponent<TextMesh>().color = diceScript.diceStruct.color;
     }
 }

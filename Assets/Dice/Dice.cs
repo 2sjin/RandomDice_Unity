@@ -22,12 +22,18 @@ public class Dice : MonoBehaviour {
         // 바람 주사위: 공격속도 증가
         if (diceStruct.id == 3)
             diceStruct.attackSpeed = diceStruct.attackSpeed * (1 - (diceStruct.s0 * 0.01f));
+
+        // 성장류 주사위
+        if (diceStruct.id >= 7 && diceStruct.id <= 9)
+            gameObject.AddComponent<Growth>();
     }
 
     private void Update() {
         updateLevelText();
-        diceManager.GetComponent<DiceManager>().applyDiceType(gameObject);
+        diceManager.GetComponent<DiceManager>().applyDiceColor(gameObject);
+        diceManager.GetComponent<DiceManager>().applyDiceSprite(gameObject, diceStruct.rarity, diceStruct.spriteID);
 
+        // 기본공격
         attackCooltime += Time.deltaTime;
         if (attackCooltime >= diceStruct.attackSpeed / diceStruct.level) {   // (공격속도 / 눈금 수) 마다 한번씩 공격
             attack();
@@ -52,10 +58,15 @@ public class Dice : MonoBehaviour {
         levelText.transform.position = transform.position;
     }
 
-    // 레벨 설정
-    public void setLevel(int level) {
-        diceStruct.level = level;
+    // 주사위 파괴
+    public void destroyDice() {
+        DiceManager diceManagerScript = diceManager.GetComponent<DiceManager>();
+        int gameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
+        diceManagerScript.diceArray[gameObjectIndex] = null;
+        Destroy(gameObject);
+        Destroy(levelText);
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
