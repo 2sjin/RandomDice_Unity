@@ -7,12 +7,12 @@ public class Dice : MonoBehaviour {
 
     public GameObject bulletPrefab;
     public GameObject levelText;
-
-    public int level = 1;
     public DiceInfo diceInfo;
+    
+    int level = 1;      // 주사위 눈금 수
 
     private float attackCooltime = 0.0f;    // 공격 주기(초)
-    private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치)
+    private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치할 좌표)
     private Collider2D colliderDice;
     private bool isTrigger = false;
 
@@ -27,7 +27,7 @@ public class Dice : MonoBehaviour {
         diceManager.GetComponent<DiceManager>().applyDiceType(gameObject);
 
         attackCooltime += Time.deltaTime;
-        if (attackCooltime >= diceInfo.attackSpeed) {
+        if (attackCooltime >= diceInfo.attackSpeed / level) {   // (공격속도 / 눈금 수) 마다 한번씩 공격
             attack();
             attackCooltime = 0.0f;
         }
@@ -108,7 +108,7 @@ public class Dice : MonoBehaviour {
         int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, other.gameObject);
 
         // 두 주사위의 눈금이 다르거나, 눈금이 최대치(7)일 경우 합성 없이 리턴
-        if (level != other.GetComponent<Dice>().level || level >= 7)
+        if (this.level != other.GetComponent<Dice>().level || level >= 7)
             return;
 
         // 두 주사위의 종류가 다를 경우 합성 없이 리턴

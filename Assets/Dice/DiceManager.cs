@@ -50,11 +50,11 @@ public class DiceManager : MonoBehaviour {
         diceArray[diceIndex]
             = Instantiate(dicePrefab, new Vector3(newDicePosX, newDicePosY, 0), Quaternion.identity);        
 
+        // 새로 생성한 주사위 종류 설정
+        diceArray[diceIndex].GetComponent<Dice>().diceInfo = deckArray[Random.Range(0, 5)];
+
         // 새로 생성한 주사위 레벨 설정
         diceArray[diceIndex].GetComponent<Dice>().setLevel(level);
-
-        // 새로 생성한 주사위 종류 설정(0~4)
-        diceArray[diceIndex].GetComponent<Dice>().diceInfo = deckArray[Random.Range(0, 5)];
     }
 
     // 
