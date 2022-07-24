@@ -7,10 +7,8 @@ public class Dice : MonoBehaviour {
 
     public GameObject bulletPrefab;
     public GameObject levelText;
-    public DiceInfo diceInfo;
+    public DiceInfo.DiceStruct diceStruct;
     
-    int level = 1;      // 주사위 눈금 수
-
     private float attackCooltime = 0.0f;    // 공격 주기(초)
     private Vector3 currentPosition;    // 주사위의 현재 좌표(드래그 후 원위치할 좌표)
     private Collider2D colliderDice;
@@ -26,8 +24,12 @@ public class Dice : MonoBehaviour {
         updateLevelText();
         diceManager.GetComponent<DiceManager>().applyDiceType(gameObject);
 
+        // 바람 주사위: 공격속도 증가
+        if (diceStruct.id == 3)
+            diceStruct.attackSpeed = diceStruct.attackSpeed * (1 - (diceStruct.s0 * 0.01f));
+
         attackCooltime += Time.deltaTime;
-        if (attackCooltime >= diceInfo.attackSpeed / level) {   // (공격속도 / 눈금 수) 마다 한번씩 공격
+        if (attackCooltime >= diceStruct.attackSpeed / diceStruct.level) {   // (공격속도 / 눈금 수) 마다 한번씩 공격
             attack();
             attackCooltime = 0.0f;
         }
@@ -36,9 +38,9 @@ public class Dice : MonoBehaviour {
     // 기본 공격
     private void attack() {
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().diceInfo = diceInfo;  // 주사위 정보 전달
+        bullet.GetComponent<Bullet>().diceStruct = diceStruct;  // 주사위 정보 전달
         bullet.GetComponent<Bullet>().targetIndex = 0;      // 타겟 인덱스 전달
-        if (diceInfo.target == "random") {   // 랜덤일 경우의 타겟 인덱스 전달
+        if (diceStruct.target == "random") {   // 랜덤일 경우의 타겟 인덱스 전달
             int monsterCount = monsterManager.GetComponent<MonsterManager>().monsterList.Count;
             bullet.GetComponent<Bullet>().targetIndex = UnityEngine.Random.Range(0, monsterCount);
         }
@@ -46,13 +48,13 @@ public class Dice : MonoBehaviour {
 
     // LevelText 갱신
     private void updateLevelText() {
-        levelText.GetComponent<TextMesh>().text = level.ToString();
+        levelText.GetComponent<TextMesh>().text = diceStruct.level.ToString();
         levelText.transform.position = transform.position;
     }
 
     // 레벨 설정
     public void setLevel(int level) {
-        this.level = level;
+        diceStruct.level = level;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,11 +110,11 @@ public class Dice : MonoBehaviour {
         int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, other.gameObject);
 
         // 두 주사위의 눈금이 다르거나, 눈금이 최대치(7)일 경우 합성 없이 리턴
-        if (this.level != other.GetComponent<Dice>().level || level >= 7)
+        if (diceStruct.level != other.GetComponent<Dice>().diceStruct.level || diceStruct.level >= 7)
             return;
 
         // 두 주사위의 종류가 다를 경우 합성 없이 리턴
-        if (diceInfo.id != other.GetComponent<Dice>().diceInfo.id)
+        if (diceStruct.id != other.GetComponent<Dice>().diceStruct.id)
             return;
 
         // 배열에서 주사위 제거(null 값으로 변경)
@@ -132,7 +134,7 @@ public class Dice : MonoBehaviour {
         Destroy(other.GetComponent<Dice>().levelText);
 
         // 새로운 주사위 1개 생성
-        diceManagerScript.createDice(otherGameObjectIndex, level+1);
+        diceManagerScript.createDice(otherGameObjectIndex, diceStruct.level+1);
     }
 }
 

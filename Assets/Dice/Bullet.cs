@@ -6,13 +6,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
     private MonsterManager monsterManager;
     private SkillManager skillManager;
-    public DiceInfo diceInfo;
+    public DiceInfo.DiceStruct diceStruct;
     public int targetIndex;
 
     void Start() {
         monsterManager = GameObject.Find("MonsterManager").GetComponent<MonsterManager>();
         skillManager = GameObject.Find("SkillManager").GetComponent<SkillManager>();
-        GetComponent<SpriteRenderer>().color = diceInfo.color;
+        GetComponent<SpriteRenderer>().color = diceStruct.color;
     }
 
     void Update() {
@@ -31,23 +31,23 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Monster") {
             Monster monster = other.GetComponent<Monster>(); 
-            monster.hp -= (int) diceInfo.attackDamage;
+            monster.hp -= (int) diceStruct.attackDamage;
             Destroy(gameObject);  // 총알 삭제
 
             // 스킬 발동
-            switch(diceInfo.id) {
+            switch(diceStruct.id) {
                 case 0:     // 불 주사위
                     GameObject fire = Instantiate(skillManager.skillList[0]);
                     fire.transform.position = transform.position;
-                    fire.GetComponent<Fire>().damage = diceInfo.special[0];
+                    fire.GetComponent<Fire>().damage = diceStruct.s0;
                     break;
                 case 2:     // 독 주사위
-                    monster.GetComponent<StatusManager>().poisonDamage = diceInfo.special[0];
-                    monster.GetComponent<StatusManager>().isPoison = true;
+                    monster.GetComponent<MonsterStatus>().poisonDamage = diceStruct.s0;
+                    monster.GetComponent<MonsterStatus>().isPoison = true;
                     break;
                 case 4:     // 얼음 주사위
-                    monster.GetComponent<StatusManager>().freezeEffect = diceInfo.special[0];
-                    monster.GetComponent<StatusManager>().isFreeze = true;
+                    monster.GetComponent<MonsterStatus>().freezeEffect = diceStruct.s0;
+                    monster.GetComponent<MonsterStatus>().isFreeze = true;
                     break;
             }
         }

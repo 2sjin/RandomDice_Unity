@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StatusManager : MonoBehaviour {
+public class MonsterStatus : MonoBehaviour {
     private Monster monster;
     private float time = 0.0f;
 
@@ -19,11 +19,13 @@ public class StatusManager : MonoBehaviour {
 
         // 독
         if (time >= 1.0f) {
-            monster.hp -= (int) poisonDamage;
+            if (isPoison)
+                monster.hp -= (int) poisonDamage;
             time = 0.0f;
         }
 
         // 얼음
-        monster.moveSpeed = 1 - (freezeEffect * 0.01f);
+        if (isFreeze)
+            monster.moveSpeed = 1 - (freezeEffect * 0.01f);
     }
 }

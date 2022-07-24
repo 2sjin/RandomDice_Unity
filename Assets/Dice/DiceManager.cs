@@ -8,7 +8,7 @@ public class DiceManager : MonoBehaviour {
     [SerializeField]
     public GameObject [] diceArray = new GameObject[15];      // 주사위 배열
     
-    public DiceInfo [] deckArray = new DiceInfo[5];    // 주사위 덱 정보
+    public DiceInfo.DiceStruct [] deckArray = new DiceInfo.DiceStruct[5];    // 주사위 덱 정보
 
     float firstPosX = -1.1f;    // 첫 주사위의 X 좌표
     float firstPosY = -0.7f;     // 첫 주사위의 Y 좌표
@@ -21,11 +21,11 @@ public class DiceManager : MonoBehaviour {
         }
 
         // 테스트용 코드(주사위 덱 불러오기)
-        deckArray[0] = new DiceInfo(0, 20, 0.8f, "front", 20, 0, 0, new Color32(215, 32, 56, 255));
-        deckArray[1] = new DiceInfo(1, 30, 0.7f, "front", 30, 0, 0, new Color32(236, 178, 54, 255));
-        deckArray[2] = new DiceInfo(2, 20, 1.3f, "random", 50, 0, 0, new Color32(56, 181, 4, 255));
-        deckArray[3] = new DiceInfo(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255));
-        deckArray[4] = new DiceInfo(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255));
+        deckArray[0] = new DiceInfo.DiceStruct(0, 20, 0.8f, "front", 20, 0, 0, new Color32(215, 32, 56, 255));
+        deckArray[1] = new DiceInfo.DiceStruct(1, 30, 0.7f, "front", 30, 0, 0, new Color32(236, 178, 54, 255));
+        deckArray[2] = new DiceInfo.DiceStruct(2, 20, 1.3f, "random", 50, 0, 0, new Color32(56, 181, 4, 255));
+        deckArray[3] = new DiceInfo.DiceStruct(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255));
+        deckArray[4] = new DiceInfo.DiceStruct(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255));
     }
 
     // 주사위 생성
@@ -51,7 +51,7 @@ public class DiceManager : MonoBehaviour {
             = Instantiate(dicePrefab, new Vector3(newDicePosX, newDicePosY, 0), Quaternion.identity);        
 
         // 새로 생성한 주사위 종류 설정
-        diceArray[diceIndex].GetComponent<Dice>().diceInfo = deckArray[Random.Range(0, 5)];
+        diceArray[diceIndex].GetComponent<Dice>().diceStruct = deckArray[Random.Range(0, 5)];
 
         // 새로 생성한 주사위 레벨 설정
         diceArray[diceIndex].GetComponent<Dice>().setLevel(level);
@@ -61,7 +61,7 @@ public class DiceManager : MonoBehaviour {
     public void applyDiceType(GameObject dice) {
         Dice diceScript = dice.GetComponent<Dice>();
 
-        dice.GetComponent<SpriteRenderer>().sprite = GetComponent<DiceSpriteManager>().spriteList[diceScript.diceInfo.id];
-        diceScript.levelText.GetComponent<TextMesh>().color = diceScript.diceInfo.color;
+        dice.GetComponent<SpriteRenderer>().sprite = GetComponent<DiceSpriteManager>().spriteList[diceScript.diceStruct.id];
+        diceScript.levelText.GetComponent<TextMesh>().color = diceScript.diceStruct.color;
     }
 }
