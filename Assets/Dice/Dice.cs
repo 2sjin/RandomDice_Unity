@@ -18,15 +18,15 @@ public class Dice : MonoBehaviour {
         diceManager = GameObject.Find("DiceManager");
         monsterManager = GameObject.Find("MonsterManager");
         levelText = Instantiate(levelText);
+
+        // 바람 주사위: 공격속도 증가
+        if (diceStruct.id == 3)
+            diceStruct.attackSpeed = diceStruct.attackSpeed * (1 - (diceStruct.s0 * 0.01f));
     }
 
     private void Update() {
         updateLevelText();
         diceManager.GetComponent<DiceManager>().applyDiceType(gameObject);
-
-        // 바람 주사위: 공격속도 증가
-        if (diceStruct.id == 3)
-            diceStruct.attackSpeed = diceStruct.attackSpeed * (1 - (diceStruct.s0 * 0.01f));
 
         attackCooltime += Time.deltaTime;
         if (attackCooltime >= diceStruct.attackSpeed / diceStruct.level) {   // (공격속도 / 눈금 수) 마다 한번씩 공격
