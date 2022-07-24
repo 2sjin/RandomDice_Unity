@@ -9,6 +9,8 @@ public class Monster : MonoBehaviour {
     [SerializeField] public int hp;
     [SerializeField] private GameObject hpText;
 
+    public bool isPoison = false;
+
     private void Start() {
         monsterManager = GameObject.Find("MonsterManager");
         hpText = Instantiate(hpText);
