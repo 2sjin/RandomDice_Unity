@@ -29,8 +29,8 @@ public class Monster : MonoBehaviour {
 
     // 몬스터 이동
      private void move() {        
-        if (transform.position.y >= 1) {
-            if (transform.position.x >= 2)
+        if (transform.position.y >= monsterManager.GetComponent<MonsterManager>().corner1_Y) {
+            if (transform.position.x >= monsterManager.GetComponent<MonsterManager>().corner2_X)
                 direction = Vector3.down;   // 두 번째 모퉁이를 만났을 때의 방향 전환
             else
                 direction = Vector3.right;  // 첫 번째 모퉁이를 만났을 때의 방향 전환

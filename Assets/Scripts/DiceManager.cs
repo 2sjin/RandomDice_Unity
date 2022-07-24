@@ -10,10 +10,10 @@ public class DiceManager : MonoBehaviour {
     
     public DiceInfo [] deckArray = new DiceInfo[5];    // 주사위 덱 정보
 
-    float firstPosX = -1.4f;    // 첫 주사위의 X 좌표
-    float firstPosY = 0.35f;     // 첫 주사위의 Y 좌표
-    float marginX = 0.7f;   // X 간격
-    float marginY = 0.7f;   // Y 간
+    float firstPosX = -1.1f;    // 첫 주사위의 X 좌표
+    float firstPosY = -0.7f;     // 첫 주사위의 Y 좌표
+    float marginX = 0.55f;   // X 간격
+    float marginY = 0.55f;   // Y 간격
 
     void Start() {
         for (int i=0; i<15; i++) {

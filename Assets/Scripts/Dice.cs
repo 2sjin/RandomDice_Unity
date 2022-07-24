@@ -31,7 +31,6 @@ public class Dice : MonoBehaviour {
             attack();
             attackCooltime = 0.0f;
         }
-
     }
 
     // 기본 공격

@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343807701171500194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.76, y: 0.09, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_LocalPosition: {x: -1.1, y: -0.7, z: 0}
+  m_LocalScale: {x: 0.33, y: 0.33, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2597468208959233092, guid: c5ed2c5b309aaf54e9d8777da2890d9a, type: 3}
   levelText: {fileID: 6272834493684605787, guid: ade13f5f91978294ea95a975fdcd3ea5, type: 3}
   level: 1
-  type: 0
+  diceInfo: {fileID: 0}
 --- !u!61 &7296009091385390012
 BoxCollider2D:
   m_ObjectHideFlags: 0
