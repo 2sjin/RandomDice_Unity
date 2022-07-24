@@ -112,7 +112,7 @@ public class Dice : MonoBehaviour {
             return;
 
         // 두 주사위의 종류가 다를 경우 합성 없이 리턴
-        if (diceInfo != other.GetComponent<Dice>().diceInfo)
+        if (diceInfo.id != other.GetComponent<Dice>().diceInfo.id)
             return;
 
         // 배열에서 주사위 제거(null 값으로 변경)
