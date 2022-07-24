@@ -21,11 +21,13 @@ public class DiceManager : MonoBehaviour {
         }
 
         // 테스트용 코드(주사위 덱 불러오기)
-        deckArray[0] = new DiceInfo.DiceStruct(0, 20, 0.8f, "front", 20, 0, 0, new Color32(215, 32, 56, 255));
-        deckArray[1] = new DiceInfo.DiceStruct(1, 30, 0.7f, "front", 30, 0, 0, new Color32(236, 178, 54, 255));
-        deckArray[2] = new DiceInfo.DiceStruct(2, 20, 1.3f, "random", 50, 0, 0, new Color32(56, 181, 4, 255));
-        deckArray[3] = new DiceInfo.DiceStruct(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255));
-        deckArray[4] = new DiceInfo.DiceStruct(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255));
+//        deckArray[0] = new DiceInfo.DiceStruct(0, 20, 0.8f, "front", 20, 0, 0, new Color32(215, 32, 56, 255));      // 불
+//        deckArray[1] = new DiceInfo.DiceStruct(1, 30, 0.7f, "front", 30, 0, 0, new Color32(236, 178, 54, 255));     // 전기
+        deckArray[0] = new DiceInfo.DiceStruct(2, 20, 1.3f, "random", 50, 0, 0, new Color32(56, 181, 4, 255));      // 독
+        deckArray[1] = new DiceInfo.DiceStruct(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255));     // 바람
+        deckArray[2] = new DiceInfo.DiceStruct(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255));      // 얼음
+        deckArray[3] = new DiceInfo.DiceStruct(5, 50, 0.9f, "random", 0, 0, 0, new Color32(170, 0, 255, 255));     // 고장난
+        deckArray[4] = new DiceInfo.DiceStruct(6, 7, 1.0f, "front", 0, 0, 0, new Color32(104, 0, 255, 255));     // 도박
     }
 
     // 주사위 생성

@@ -31,6 +31,12 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Monster") {
             Monster monster = other.GetComponent<Monster>(); 
+
+            // 도박 주사위 랜덤 데미지
+            if (diceStruct.id == 6) {
+                diceStruct.attackDamage = UnityEngine.Random.Range(diceStruct.attackDamage, diceStruct.attackDamage*25+1);
+            }
+
             monster.hp -= (int) diceStruct.attackDamage;
             Destroy(gameObject);  // 총알 삭제
 
