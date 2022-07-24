@@ -41,6 +41,19 @@ public class Bullet : MonoBehaviour {
                     fire.transform.position = transform.position;
                     fire.GetComponent<Fire>().damage = diceStruct.s0;
                     break;
+                case 1:     // 전기 주사위
+                    GameObject electricMonster;
+                    for (int i=0; i<3; i++) {                        
+                        try {
+                            electricMonster = monsterManager.monsterList[i].gameObject;                            
+                            GameObject electric = Instantiate(skillManager.skillList[1]);
+                            electric.transform.position = electricMonster.transform.position;
+                            electric.GetComponent<Fire>().damage = diceStruct.s0;
+                        } catch(ArgumentOutOfRangeException e) {
+                            break;
+                        }
+                    }
+                    break;
                 case 2:     // 독 주사위
                     monster.GetComponent<MonsterStatus>().poisonDamage = diceStruct.s0;
                     monster.GetComponent<MonsterStatus>().isPoison = true;
