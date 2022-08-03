@@ -27,11 +27,11 @@ public class DiceManager : MonoBehaviour {
 //        deckArray[0] = new DiceInfo.DiceStruct(4, 30, 1.5f, "front", 30, 0, 0, new Color32(2, 142, 224, 255), "Common", 4);      // 얼음
 //        deckArray[0] = new DiceInfo.DiceStruct(5, 50, 0.9f, "random", 0, 0, 0, new Color32(170, 0, 255, 255), "Common", 5);     // 고장난
         
-        deckArray[0] = new DiceInfo.DiceStruct(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255), "Common", 3);    // 바람
-        deckArray[1] = new DiceInfo.DiceStruct(6, 7, 1.0f, "front", 0, 0, 0, new Color32(104, 0, 255, 255), "Common", 6);       // 도박
-        deckArray[2] = new DiceInfo.DiceStruct(7, 30, 1.0f, "front", 40, 0, 0, new Color32(162, 106, 52, 255), "Rare", 0);        // 도성
-        deckArray[3] = new DiceInfo.DiceStruct(8, 8, 2.0f, "front", 7, 60, 0, new Color32(192, 141, 231, 255), "Unique", 0);      // 고성
-        deckArray[4] = new DiceInfo.DiceStruct(9, 10, 2.0f, "front", 10, 0, 0, new Color32(53, 24, 93, 255), "Legendary", 0);   // 성장
+        deckArray[0] = new DiceInfo.DiceStruct(3, 20, 0.45f, "front", 10, 0, 0, new Color32(0, 211, 166, 255), "common", 3);    // 바람
+        deckArray[1] = new DiceInfo.DiceStruct(6, 7, 1.0f, "front", 0, 0, 0, new Color32(104, 0, 255, 255), "common", 6);       // 도박
+        deckArray[2] = new DiceInfo.DiceStruct(7, 30, 1.0f, "front", 40, 0, 0, new Color32(162, 106, 52, 255), "rare", 0);        // 도성
+        deckArray[3] = new DiceInfo.DiceStruct(8, 8, 2.0f, "front", 7, 60, 0, new Color32(192, 141, 231, 255), "unique", 0);      // 고성
+        deckArray[4] = new DiceInfo.DiceStruct(9, 10, 2.0f, "front", 10, 0, 0, new Color32(53, 24, 93, 255), "legendary", 0);   // 성장
     }
 
     // 주사위 생성
@@ -69,16 +69,16 @@ public class DiceManager : MonoBehaviour {
         List<Sprite> SpriteList;
 
         switch(rarity) {
-            case "Common":
+            case "common":
                 SpriteList = diceSpritesScript.Common;
                 break;
-            case "Rare":
+            case "rare":
                 SpriteList = diceSpritesScript.Rare;
                 break;
-            case "Unique":
+            case "unique":
                 SpriteList = diceSpritesScript.Unique;
                 break;
-            case "Legendary":
+            case "legendary":
                 SpriteList = diceSpritesScript.Legendary;
                 break;
             default:

@@ -1,8 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class DiceInfo : MonoBehaviour {
+    public string selectURL = "http://152.70.94.65/random_dice/select_dice.php";   // PHP 스크립트
+
+    // 구조체를 사용하지 않으면, 필드 내 같은 종류의 주사위는 무조건 같은 눈금이 적용됨
     public struct DiceStruct {
         public int id;  // 주사위 ID
         public float attackDamage;  // 기본 공격력
@@ -33,6 +36,29 @@ public class DiceInfo : MonoBehaviour {
             this.spriteID = spriteID;
 
             this.level = 1;
+        }
+    }
+
+    // 데이터베이스에서 주사위 정보 가져오기(SELECT)
+    public void select() {
+        StartCoroutine(getDiceInfoFromDatabase());
+    }
+
+
+// 데이터베이스에서 주사위 정보 가져오기(SELECT)
+    IEnumerator getDiceInfoFromDatabase(){
+        // 데이터 POST 전송
+        WWWForm form = new WWWForm();
+        form.AddField("id_field", "7");
+        UnityWebRequest webRequest = UnityWebRequest.Post(selectURL, form);
+        yield return webRequest.SendWebRequest();
+
+        // 메시지 출력
+        if (webRequest.error != null)
+            Debug.Log(webRequest.error);
+        else {
+            string dataText = webRequest.downloadHandler.text;
+            Debug.Log(dataText);
         }
     }
 }
