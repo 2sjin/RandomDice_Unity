@@ -101,8 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2597468208959233092, guid: c5ed2c5b309aaf54e9d8777da2890d9a, type: 3}
   levelText: {fileID: 6272834493684605787, guid: ade13f5f91978294ea95a975fdcd3ea5, type: 3}
-  level: 1
-  diceInfo: {fileID: 0}
+  bulletPoint: {fileID: 1677122635002293905, guid: 3342aa162191614478570c84006adcea, type: 3}
 --- !u!61 &7296009091385390012
 BoxCollider2D:
   m_ObjectHideFlags: 0

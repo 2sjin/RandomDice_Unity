@@ -6,7 +6,8 @@ public class Dice : MonoBehaviour {
     private GameObject monsterManager;
 
     public GameObject bulletPrefab;
-    public GameObject levelText;
+    public GameObject levelText;    // 레벨(눈금)
+    public GameObject bulletPoint;  // 투사체 시작점(주사위를 드래그해도 변하지 않음)
     public DiceInfo.DiceStruct diceStruct;
     
     private float attackCooltime = 0.0f;    // 공격 주기(초)
@@ -17,7 +18,8 @@ public class Dice : MonoBehaviour {
     private void Start() {
         diceManager = GameObject.Find("DiceManager");
         monsterManager = GameObject.Find("MonsterManager");
-        levelText = Instantiate(levelText);
+        levelText = Instantiate(levelText, transform.position, Quaternion.identity);     // 레벨(눈금) 텍스트 생성
+        bulletPoint = Instantiate(bulletPoint, transform.position, Quaternion.identity); // 투사체 시작점 생성
 
         // 바람 주사위: 공격속도 증가
         if (diceStruct.id == 3)
@@ -43,7 +45,7 @@ public class Dice : MonoBehaviour {
 
     // 기본 공격
     private void attack() {
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, bulletPoint.gameObject.transform.position, Quaternion.identity); // 투사체 생성
         bullet.GetComponent<Bullet>().diceStruct = diceStruct;  // 주사위 정보 전달
         bullet.GetComponent<Bullet>().targetIndex = 0;      // 타겟 인덱스 전달
         if (diceStruct.target == "random") {   // 랜덤일 경우의 타겟 인덱스 전달
@@ -63,8 +65,9 @@ public class Dice : MonoBehaviour {
         DiceManager diceManagerScript = diceManager.GetComponent<DiceManager>();
         int gameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
         diceManagerScript.diceArray[gameObjectIndex] = null;
-        Destroy(gameObject);
-        Destroy(levelText);
+        Destroy(gameObject);    // 주사위 오브젝트 제거
+        Destroy(levelText);     // 주사위 눈금 제거
+        Destroy(bulletPoint);   // 투사체 시작점 제거
     }
 
 
