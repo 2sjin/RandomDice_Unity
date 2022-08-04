@@ -9,6 +9,8 @@ public class DiceManager : MonoBehaviour {
     public DiceInfo.DiceStruct [] deckArray = new DiceInfo.DiceStruct[5];    // 주사위 덱 정보
     public static string [] diceDataText = new string[5];   // DB에서 가져올 주사위 정보
 
+    public static int [] deckIdArray = new int[5]; // 로비에서 가져온 주사위 ID
+
     float firstPosX = -1.1f;    // 첫 주사위의 X 좌표
     float firstPosY = -0.7f;    // 첫 주사위의 Y 좌표
     float marginX = 0.55f;   // X 간격
@@ -19,13 +21,13 @@ public class DiceManager : MonoBehaviour {
         for (int i=0; i<15; i++)
             diceFieldArray[i] = null;
 
-        // (테스트용 코드) DB에 연결하여 (주사위ID, 덱 인덱스)에 해당하는 주사위 정보를 가져옴
+        // DB에 연결하여 (주사위ID, 덱 인덱스)에 해당하는 주사위 정보를 가져옴
         DiceDatabaseConnector dbConnector = diceDataBaseConnector.GetComponent<DiceDatabaseConnector>();
-        dbConnector.getDiceInfoFromDatabase(3, 0);     // 바람        
-        dbConnector.getDiceInfoFromDatabase(6, 1);     // 도박
-        dbConnector.getDiceInfoFromDatabase(7, 2);     // 도성
-        dbConnector.getDiceInfoFromDatabase(8, 3);     // 고성
-        dbConnector.getDiceInfoFromDatabase(9, 4);     // 성장
+        dbConnector.getDiceInfoFromDatabase(deckIdArray[0], 0);     // 바람        
+        dbConnector.getDiceInfoFromDatabase(deckIdArray[1], 1);     // 도박
+        dbConnector.getDiceInfoFromDatabase(deckIdArray[2], 2);     // 도성
+        dbConnector.getDiceInfoFromDatabase(deckIdArray[3], 3);     // 고성
+        dbConnector.getDiceInfoFromDatabase(deckIdArray[4], 4);     // 성장
     }
 
     void Update() {
