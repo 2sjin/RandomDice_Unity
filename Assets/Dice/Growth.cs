@@ -14,8 +14,11 @@ public class Growth : MonoBehaviour {
         if (time >= dice.diceStruct.s0) {   // 성장 대기 시간이 끝나면
             DiceManager diceManagerScript = GameObject.Find("DiceManager").GetComponent<DiceManager>();
 
-            // 기존 주사위 제거
+            // 현재 주사위의 정보 저장
             int diceIndex = Array.IndexOf(diceManagerScript.diceFieldArray, gameObject);
+            int diceLevel = dice.diceStruct.level;
+
+            // 기존 주사위 제거
             dice.destroyDice();
 
             switch (dice.diceStruct.id) {
@@ -26,17 +29,16 @@ public class Growth : MonoBehaviour {
                     int randomNum = UnityEngine.Random.Range(0, 100);
                     // 성장 실패
                     if (randomNum < dice.diceStruct.s1)
-                        if (dice.diceStruct.level > 1)     // 2눈금 이상 -> 1눈금 감소
-                            diceManagerScript.createDice(diceIndex, dice.diceStruct.level - 1, -1);
+                        if (diceLevel > 1)     // 2눈금 이상 -> 1눈금 감소
+                            diceManagerScript.createDice(diceIndex, diceLevel-1, -1);
                     // 성장 성공
-                    else if (dice.diceStruct.level < 7)      // 7눈금 미만일 경우 성장
-                        diceManagerScript.createDice(diceIndex, dice.diceStruct.level + 1, -1);
+                    else if (diceLevel < 7)      // 7눈금 미만일 경우 성장
+                        diceManagerScript.createDice(diceIndex, diceLevel+1, -1);
                     break;
                 case 9:    // 성장 주사위: 같은 자리에 +1 주사위 생성
-                    if (dice.diceStruct.level < 7)
-                        diceManagerScript.createDice(diceIndex, dice.diceStruct.level + 1, -1);
+                    if (diceLevel < 7)
+                        diceManagerScript.createDice(diceIndex, diceLevel+1, -1);
                     break;
-
             }
         }        
     }
