@@ -124,14 +124,14 @@ public class Dice : MonoBehaviour {
         int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceFieldArray, other.gameObject);
 
         // other 주사위의 구조체 구하기
-        DiceInfo.DiceStruct otherGameObjectStruct = other.GetComponent<Dice>().diceStruct;
+        DiceInfo.DiceStruct otherDiceStruct = other.GetComponent<Dice>().diceStruct;
 
         // 두 주사위의 눈금이 다르면, 합성 없이 리턴
-        if (diceStruct.level != otherGameObjectStruct.level)
+        if (diceStruct.level != otherDiceStruct.level)
             return;
 
         // 조커 주사위
-        if (diceStruct.id == 10) {
+        if (diceStruct.id == 10 && otherDiceStruct.id != 10) {      // 둘 다 조커 주사위면 복사 없이 합성
             // 조커 주사위 제거
             diceManagerScript.diceFieldArray[gameObjectIndex] = null;
             Destroy(gameObject);
@@ -139,7 +139,7 @@ public class Dice : MonoBehaviour {
             // 복사한 주사위를 조커 주사위 자리에 생성
             for (int i=0; i<5; i++) {
                 PowerUpButton deck = GameObject.Find("PowerUpButton" + i.ToString()).GetComponent<PowerUpButton>();
-                if (otherGameObjectStruct.id == deck.diceId)
+                if (otherDiceStruct.id == deck.diceId)
                     diceManagerScript.createDice(gameObjectIndex, diceStruct.level, i);
             }
             return;
@@ -150,7 +150,7 @@ public class Dice : MonoBehaviour {
             return;
 
         // 두 주사위의 종류가 다를 경우 합성 없이 리턴
-        if (diceStruct.id != otherGameObjectStruct.id)
+        if (diceStruct.id != otherDiceStruct.id)
             return;
 
         // 배열에서 주사위 제거(null 값으로 변경)
