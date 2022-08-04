@@ -15,7 +15,7 @@ public class Growth : MonoBehaviour {
             DiceManager diceManagerScript = GameObject.Find("DiceManager").GetComponent<DiceManager>();
 
             // 기존 주사위 제거
-            int diceIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
+            int diceIndex = Array.IndexOf(diceManagerScript.diceFieldArray, gameObject);
             dice.destroyDice();
 
             switch (dice.diceStruct.id) {

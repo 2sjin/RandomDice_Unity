@@ -1,64 +1,45 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+
 
 public class DiceInfo : MonoBehaviour {
-    public string selectURL = "http://152.70.94.65/random_dice/select_dice.php";   // PHP 스크립트
-
     // 구조체를 사용하지 않으면, 필드 내 같은 종류의 주사위는 무조건 같은 눈금이 적용됨
     public struct DiceStruct {
-        public int id;  // 주사위 ID
+        public int id;          // 주사위 ID
+        public string name;     // 주사위 이름
+        public string rarity;   // 희귀도
+        public int spriteID;    // 스프라이트 ID
         public float attackDamage;  // 기본 공격력
         public float attackSpeed;   // 공격 속도(초)
         public string target;       // 타겟
+        public float s0;    // 특수 능력치 0
+        public float s1;    // 특수 능력치 1
+        public float s2;    // 특수 능력치 2
+        public Color32 color;   // 투사체 색상
+        public int level;       // 레벨(눈금) - 초기에는 1눈금
 
-        public float s0;
-        public float s1;
-        public float s2;
+        public DiceStruct(string diceDataText) {
+            // 구분자('/')를 기준으로 문자열을 토큰으로 분해하여 임시 리스트에 추가
+            string[] tokens = diceDataText.Split('/');
+            List<string> tempList = new List<string>();
+            foreach(string token in tokens) {
+                tempList.Add(token);
+            }
 
-        public string rarity;   // 희귀도
-        public int spriteID;    // 스프라이트 ID
-        public Color32 color;   // 색상
-        
-        public int level;
-
-        public DiceStruct(int id, float damage, float speed, string target, float s0, float s1, float s2, Color32 color,
-                          string rarity, int spriteID) {
-            this.id = id;
-            this.attackDamage = damage;
-            this.attackSpeed = speed;
-            this.target = target;
-            this.s0 = s0;
-            this.s1 = s1;
-            this.s2 = s2;
-            this.color = color;
-            this.rarity = rarity;
-            this.spriteID = spriteID;
-
+            // 리스트에 저장된 각 토큰의 값을 순서대로 구조체 멤버 변수에 대입
+            this.id = int.Parse(tempList[0]);
+            this.name = tempList[1];
+            this.rarity = tempList[2];
+            this.spriteID = int.Parse(tempList[3]);
+            this.attackDamage = float.Parse(tempList[4]);
+            this.attackSpeed = float.Parse(tempList[5]);
+            this.target = tempList[6];
+            this.s0 = float.Parse(tempList[7]);
+            this.s1 = float.Parse(tempList[8]);
+            this.s2 = float.Parse(tempList[9]);
+            this.color = new Color32(byte.Parse(tempList[10]), byte.Parse(tempList[11]), byte.Parse(tempList[12]), 255);
             this.level = 1;
         }
     }
 
-    // 데이터베이스에서 주사위 정보 가져오기(SELECT)
-    public void select() {
-        StartCoroutine(getDiceInfoFromDatabase());
-    }
-
-
-// 데이터베이스에서 주사위 정보 가져오기(SELECT)
-    IEnumerator getDiceInfoFromDatabase(){
-        // 데이터 POST 전송
-        WWWForm form = new WWWForm();
-        form.AddField("id_field", "7");
-        UnityWebRequest webRequest = UnityWebRequest.Post(selectURL, form);
-        yield return webRequest.SendWebRequest();
-
-        // 메시지 출력
-        if (webRequest.error != null)
-            Debug.Log(webRequest.error);
-        else {
-            string dataText = webRequest.downloadHandler.text;
-            Debug.Log(dataText);
-        }
-    }
 }

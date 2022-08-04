@@ -32,8 +32,8 @@ public class Dice : MonoBehaviour {
 
     private void Update() {
         updateLevelText();
-        diceManager.GetComponent<DiceManager>().applyDiceColor(gameObject);
-        diceManager.GetComponent<DiceManager>().applyDiceSprite(gameObject, diceStruct.rarity, diceStruct.spriteID);
+        diceManager.GetComponent<DiceManager>().loadDiceLevelColor(gameObject);
+        diceManager.GetComponent<DiceManager>().loadDiceSprite(gameObject, diceStruct.rarity, diceStruct.spriteID);
 
         // 기본공격
         attackCooltime += Time.deltaTime;
@@ -63,8 +63,8 @@ public class Dice : MonoBehaviour {
     // 주사위 파괴
     public void destroyDice() {
         DiceManager diceManagerScript = diceManager.GetComponent<DiceManager>();
-        int gameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
-        diceManagerScript.diceArray[gameObjectIndex] = null;
+        int gameObjectIndex = Array.IndexOf(diceManagerScript.diceFieldArray, gameObject);
+        diceManagerScript.diceFieldArray[gameObjectIndex] = null;
         Destroy(gameObject);    // 주사위 오브젝트 제거
         Destroy(levelText);     // 주사위 눈금 제거
         Destroy(bulletPoint);   // 투사체 시작점 제거
@@ -120,8 +120,8 @@ public class Dice : MonoBehaviour {
         DiceManager diceManagerScript = diceManager.GetComponent<DiceManager>();
 
         // 합성할 두 주사위의 배열 인덱스 구하기
-        int gameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, gameObject);
-        int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceArray, other.gameObject);
+        int gameObjectIndex = Array.IndexOf(diceManagerScript.diceFieldArray, gameObject);
+        int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceFieldArray, other.gameObject);
 
         // 두 주사위의 눈금이 다르거나, 눈금이 최대치(7)일 경우 합성 없이 리턴
         if (diceStruct.level != other.GetComponent<Dice>().diceStruct.level || diceStruct.level >= 7)
@@ -133,8 +133,8 @@ public class Dice : MonoBehaviour {
 
         // 배열에서 주사위 제거(null 값으로 변경)
         try {
-            diceManagerScript.diceArray[gameObjectIndex] = null;
-            diceManagerScript.diceArray[otherGameObjectIndex] = null;
+            diceManagerScript.diceFieldArray[gameObjectIndex] = null;
+            diceManagerScript.diceFieldArray[otherGameObjectIndex] = null;
         } catch(IndexOutOfRangeException e) {
             isTrigger = false;
             return;
