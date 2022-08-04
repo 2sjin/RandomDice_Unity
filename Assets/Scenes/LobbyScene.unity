@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6979860a7ad27c848a305b518fa13e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text:
+  diceIdText:
   - {fileID: 50593989}
   - {fileID: 831174769}
   - {fileID: 1456868756}

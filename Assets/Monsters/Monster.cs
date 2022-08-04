@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour {
     private GameObject monsterManager;
+    private GameObject player;
 
-    [SerializeField] private Vector3 direction = Vector3.zero;
-    [SerializeField] public float moveSpeed;
-    [SerializeField] public int hp;
-    [SerializeField] private GameObject hpText;
+    public Vector3 direction = Vector3.zero;
+    public float moveSpeed;
+    public int hp;
+    public GameObject hpText;
 
     private void Start() {
         monsterManager = GameObject.Find("MonsterManager");
+        player = GameObject.Find("Player");
         hpText = Instantiate(hpText);
         direction = Vector3.up;     // 몬스터의 초기 방향은 위쪽
     }
@@ -43,5 +45,6 @@ public class Monster : MonoBehaviour {
         Destroy(gameObject);      // 몬스터 오브젝트 제거
         Destroy(hpText);          // HpText 오브젝트 제거
         monsterManager.GetComponent<MonsterManager>().removeMonster(gameObject);  // 몬스터 리스트에서 몬스터 제거
+        player.GetComponent<Player>().sp += 10;   // SP 획득
      }
 }

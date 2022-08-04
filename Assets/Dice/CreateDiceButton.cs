@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CreateDiceButton : MonoBehaviour {
-    [SerializeField] private GameObject diceManager;
+    public GameObject diceManager;
+    public GameObject player;
     private DiceManager diceManagerScript;
 
     private void Start() {
@@ -11,6 +12,11 @@ public class CreateDiceButton : MonoBehaviour {
     }
 
     private void OnMouseUp() {
-        diceManagerScript.createDice(-1, 1, -1);     // 랜덤한 주사위 생성
+        Player playerScript = player.GetComponent<Player>();
+        if (playerScript.sp >= playerScript.spCost) {
+            diceManagerScript.createDice(-1, 1, -1);        // 랜덤한 주사위 생성
+            playerScript.sp -= playerScript.spCost;     // SP 소모
+            playerScript.spCost += 10;   // SP 비용 증가
+        }
     }
 }
