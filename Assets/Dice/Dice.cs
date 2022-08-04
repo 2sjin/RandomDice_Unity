@@ -123,12 +123,34 @@ public class Dice : MonoBehaviour {
         int gameObjectIndex = Array.IndexOf(diceManagerScript.diceFieldArray, gameObject);
         int otherGameObjectIndex = Array.IndexOf(diceManagerScript.diceFieldArray, other.gameObject);
 
-        // 두 주사위의 눈금이 다르거나, 눈금이 최대치(7)일 경우 합성 없이 리턴
-        if (diceStruct.level != other.GetComponent<Dice>().diceStruct.level || diceStruct.level >= 7)
+        // other 주사위의 구조체 구하기
+        DiceInfo.DiceStruct otherGameObjectStruct = other.GetComponent<Dice>().diceStruct;
+
+        // 두 주사위의 눈금이 다르면, 합성 없이 리턴
+        if (diceStruct.level != otherGameObjectStruct.level)
+            return;
+
+        // 조커 주사위
+        if (diceStruct.id == 10) {
+            // 조커 주사위 제거
+            diceManagerScript.diceFieldArray[gameObjectIndex] = null;
+            Destroy(gameObject);
+            Destroy(GetComponent<Dice>().levelText);
+            // 복사한 주사위를 조커 주사위 자리에 생성
+            for (int i=0; i<5; i++) {
+                PowerUpButton deck = GameObject.Find("PowerUpButton" + i.ToString()).GetComponent<PowerUpButton>();
+                if (otherGameObjectStruct.id == deck.diceId)
+                    diceManagerScript.createDice(gameObjectIndex, diceStruct.level, i);
+            }
+            return;
+        }
+
+        // 눈금이 최대치(7)일 경우 합성 없이 리턴
+        if (diceStruct.level >= 7)
             return;
 
         // 두 주사위의 종류가 다를 경우 합성 없이 리턴
-        if (diceStruct.id != other.GetComponent<Dice>().diceStruct.id)
+        if (diceStruct.id != otherGameObjectStruct.id)
             return;
 
         // 배열에서 주사위 제거(null 값으로 변경)
@@ -139,7 +161,6 @@ public class Dice : MonoBehaviour {
             isTrigger = false;
             return;
         }
-
         // 주사위 오브젝트 제거
         Destroy(gameObject);
         Destroy(other.gameObject);
@@ -148,7 +169,8 @@ public class Dice : MonoBehaviour {
         Destroy(other.GetComponent<Dice>().levelText);
 
         // 새로운 주사위 1개 생성
-        diceManagerScript.createDice(otherGameObjectIndex, diceStruct.level+1);
+        diceManagerScript.createDice(otherGameObjectIndex, diceStruct.level+1, -1);
+
     }
 }
 

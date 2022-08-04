@@ -11,6 +11,6 @@ public class CreateDiceButton : MonoBehaviour {
     }
 
     private void OnMouseUp() {
-        diceManagerScript.createDice(-1, 1);     // 랜덤한 주사위 생성
+        diceManagerScript.createDice(-1, 1, -1);     // 랜덤한 주사위 생성
     }
 }

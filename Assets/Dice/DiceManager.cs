@@ -38,7 +38,7 @@ public class DiceManager : MonoBehaviour {
     }
 
     // 주사위 생성
-    public void createDice(int index, int level) {
+    public void createDice(int index, int level, int deckID) {
         int diceSize = diceFieldArray.Length;
         int diceIndex = index;
         List<int> nullIndexList = new List<int>();
@@ -60,7 +60,10 @@ public class DiceManager : MonoBehaviour {
             = Instantiate(dicePrefab, new Vector3(newDicePosX, newDicePosY, 0), Quaternion.identity);        
 
         // 새로 생성한 주사위 종류 설정
-        diceFieldArray[diceIndex].GetComponent<Dice>().diceStruct = deckArray[Random.Range(0, 5)];
+        if (deckID == -1)
+            diceFieldArray[diceIndex].GetComponent<Dice>().diceStruct = deckArray[Random.Range(0, 5)];
+        else
+            diceFieldArray[diceIndex].GetComponent<Dice>().diceStruct = deckArray[deckID];
 
         // 새로 생성한 주사위 레벨 설정
         diceFieldArray[diceIndex].GetComponent<Dice>().diceStruct.level = level;
