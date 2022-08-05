@@ -9,7 +9,7 @@ public class DiceManager : MonoBehaviour {
     public DiceInfo.DiceStruct [] deckArray = new DiceInfo.DiceStruct[5];    // 주사위 덱 정보
     public static string [] diceDataText = new string[5];   // DB에서 가져올 주사위 정보
 
-    public static int [] deckIdArray = {3, 7, 8, 9, 10}; // 로비에서 가져온 주사위 ID(초기값은 테스트용)
+    public static int [] deckIdArray = {4, 8, 9, 10, 11}; // 로비에서 가져온 주사위 ID(초기값은 테스트용)
 
     float firstPosX = -1.1f;    // 첫 주사위의 X 좌표
     float firstPosY = -0.7f;    // 첫 주사위의 Y 좌표

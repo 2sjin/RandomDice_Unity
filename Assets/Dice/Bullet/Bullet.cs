@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour {
             Monster monster = other.GetComponent<Monster>(); 
 
             // 도박 주사위 랜덤 데미지
-            if (diceStruct.id == 6) {
+            if (diceStruct.name == "도박") {
                 diceStruct.attackDamage = UnityEngine.Random.Range(diceStruct.attackDamage, diceStruct.attackDamage*25+1);
             }
 
@@ -47,13 +47,13 @@ public class Bullet : MonoBehaviour {
             Destroy(gameObject);  // 총알 삭제
 
             // 스킬 발동
-            switch(diceStruct.id) {
-                case 0:     // 불 주사위
+            switch(diceStruct.name) {
+                case "불":
                     GameObject fire = Instantiate(skillManager.skillList[0]);
                     fire.transform.position = transform.position;
                     fire.GetComponent<Fire>().damage = diceStruct.s0;
                     break;
-                case 1:     // 전기 주사위
+                case "전기":
                     GameObject electricMonster;
                     for (int i=0; i<3; i++) {                        
                         try {
@@ -66,11 +66,11 @@ public class Bullet : MonoBehaviour {
                         }
                     }
                     break;
-                case 2:     // 독 주사위
+                case "독":
                     monster.GetComponent<MonsterStatus>().poisonDamage = diceStruct.s0;
                     monster.GetComponent<MonsterStatus>().isPoison = true;
                     break;
-                case 4:     // 얼음 주사위
+                case "얼음":
                     monster.GetComponent<MonsterStatus>().freezeEffect = diceStruct.s0;
                     monster.GetComponent<MonsterStatus>().isFreeze = true;
                     break;

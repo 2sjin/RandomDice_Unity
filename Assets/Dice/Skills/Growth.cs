@@ -16,18 +16,18 @@ public class Growth : MonoBehaviour {
 
             // 현재 주사위의 정보 저장
             int diceIndex = Array.IndexOf(diceManagerScript.diceFieldArray, gameObject);
-            int diceId = dice.diceStruct.id;
+            string diceName = dice.diceStruct.name;
             int diceLevel = dice.diceStruct.level;
             float diceS1 = dice.diceStruct.s1;
 
             // 기존 주사위 제거
             dice.destroyDice();
 
-            switch (diceId) {
-                case 7:    // 도박 성장 주사위: 같은 자리에 랜덤 주사위 생성
+            switch (diceName) {
+                case "도박 성장":    // 도박 성장 주사위: 같은 자리에 랜덤 주사위 생성
                     diceManagerScript.createDice(diceIndex, UnityEngine.Random.Range(1, 8), -1);
                     break;
-                case 8:    // 고장난 성장 주사위: 같은 자리에 +1 또는 -1 주사위 생성
+                case "고장난 성장":    // 고장난 성장 주사위: 같은 자리에 +1 또는 -1 주사위 생성
                     int randomNum = UnityEngine.Random.Range(0, 100);
                     // 성장 실패
                     if (randomNum < diceS1)
@@ -37,7 +37,7 @@ public class Growth : MonoBehaviour {
                     else if (diceLevel < 7)      // 7눈금 미만일 경우 성장
                         diceManagerScript.createDice(diceIndex, diceLevel+1, -1);
                     break;
-                case 9:    // 성장 주사위: 같은 자리에 +1 주사위 생성
+                case "성장":    // 성장 주사위: 같은 자리에 +1 주사위 생성
                     if (diceLevel < 7)
                         diceManagerScript.createDice(diceIndex, diceLevel+1, -1);
                     break;

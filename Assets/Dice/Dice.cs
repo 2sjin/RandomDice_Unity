@@ -22,11 +22,11 @@ public class Dice : MonoBehaviour {
         bulletPoint = Instantiate(bulletPoint, transform.position, Quaternion.identity); // 투사체 시작점 생성
 
         // 바람 주사위: 공격속도 증가
-        if (diceStruct.id == 3)
+        if (diceStruct.name == "바람")
             diceStruct.attackSpeed = diceStruct.attackSpeed * (1 - (diceStruct.s0 * 0.01f));
 
         // 성장류 주사위
-        if (diceStruct.id >= 7 && diceStruct.id <= 9)
+        if (diceStruct.name == "성장" || diceStruct.name == "고장난 성장" || diceStruct.name == "도박 성장")
             gameObject.AddComponent<Growth>();
     }
 
@@ -131,7 +131,7 @@ public class Dice : MonoBehaviour {
             return;
 
         // 조커 주사위
-        if (diceStruct.id == 10 && otherDiceStruct.id != 10) {      // 둘 다 조커 주사위면 복사 없이 합성
+        if (diceStruct.name == "조커" && otherDiceStruct.name != "조커") {      // 둘 다 조커 주사위면 복사 없이 합성
             // 조커 주사위 제거
             diceManagerScript.diceFieldArray[gameObjectIndex] = null;
             Destroy(gameObject);
