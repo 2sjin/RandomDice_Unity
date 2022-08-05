@@ -16,6 +16,10 @@ public class Bullet : MonoBehaviour {
     }
 
     void Update() {
+        // 필드에 몬스터가 없으면 투사체 소멸
+        if (monsterManager.monsterList.Count == 0)
+            Destroy(gameObject);
+
         // 투사체 발사
         try {
             GameObject targetMonster = monsterManager.monsterList[targetIndex];
