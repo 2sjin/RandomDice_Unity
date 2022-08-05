@@ -31,15 +31,22 @@ public class MonsterManager : MonoBehaviour {
                 monsterInfoArray[i] = new MonsterInfo.MonsterStruct(monsterDataText[i]);
     }
 
-    // 몬스터를 리스트에 추가
+    // 몬스터 추가
     public void addMonster(int monsterID, int monsterHp) {
         GameObject newMonster = Instantiate(monsterPrefab, monsterSpawner.transform.position, Quaternion.identity);
         newMonster.GetComponent<Monster>().monsterStruct = monsterInfoArray[monsterID];
         newMonster.GetComponent<Monster>().monsterStruct.hp = monsterHp;
-        monsterList.Add(newMonster);
+
+        int monsterId = newMonster.GetComponent<Monster>().monsterStruct.id;        
+
+        // 몬스터를 리스트에 추가
+        if (monsterId == 1)                // 스피드 몬스터는
+            monsterList.Insert(0, newMonster);    // 앞쪽 타겟 우선순위
+        else
+            monsterList.Add(newMonster);
 
         // 몬스터 오브젝트 크기 보정
-        switch (newMonster.GetComponent<Monster>().monsterStruct.id) {
+        switch (monsterId) {
             case 1:
                 newMonster.gameObject.transform.localScale = new Vector3(0.35f, 0.35f, 1);
                 break;
@@ -49,7 +56,7 @@ public class MonsterManager : MonoBehaviour {
         }
     }
 
-    // 몬스터를 리스트에서 삭제
+    // 몬스터 삭제
     public void removeMonster(GameObject monster) {
         monsterList.Remove(monster);
     }

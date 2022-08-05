@@ -1318,6 +1318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterManager: {fileID: 874484305}
+  wave: {fileID: 1119319798}
 --- !u!1 &949890364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,7 +1484,7 @@ GameObject:
   - component: {fileID: 1119319799}
   - component: {fileID: 1119319800}
   m_Layer: 0
-  m_Name: Wave
+  m_Name: WaveObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
