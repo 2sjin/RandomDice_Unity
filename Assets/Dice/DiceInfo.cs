@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 public class DiceInfo : MonoBehaviour {
-    // 구조체를 사용하지 않으면, 필드 내 같은 종류의 주사위는 무조건 같은 눈금이 적용됨
+    // 깊은 복사를 위한 구조체 사용(클래스는 얕은 복사: 필드 내 같은 종류의 주사위는 무조건 같은 눈금이 적용됨)
     public struct DiceStruct {
         public int id;          // 주사위 ID
         public string name;     // 주사위 이름

@@ -37,6 +37,16 @@ public class MonsterManager : MonoBehaviour {
         newMonster.GetComponent<Monster>().monsterStruct = monsterInfoArray[monsterID];
         newMonster.GetComponent<Monster>().monsterStruct.hp = monsterHp;
         monsterList.Add(newMonster);
+
+        // 몬스터 오브젝트 크기 보정
+        switch (newMonster.GetComponent<Monster>().monsterStruct.id) {
+            case 1:
+                newMonster.gameObject.transform.localScale = new Vector3(0.35f, 0.35f, 1);
+                break;
+            case 2:
+                newMonster.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+                break;
+        }
     }
 
     // 몬스터를 리스트에서 삭제
