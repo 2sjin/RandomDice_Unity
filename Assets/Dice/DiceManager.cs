@@ -67,6 +67,9 @@ public class DiceManager : MonoBehaviour {
 
         // 새로 생성한 주사위 레벨 설정
         diceFieldArray[diceIndex].GetComponent<Dice>().diceStruct.level = level;
+
+        // 주사위 생성 이펙트
+        diceFieldArray[diceIndex].AddComponent<PopEffect>();
     }
 
     // 주사위 스프라이트 불러오기
