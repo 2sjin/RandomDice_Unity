@@ -70,7 +70,7 @@ public class DiceManager : MonoBehaviour {
     }
 
     // 주사위 스프라이트 불러오기
-    public void loadDiceSprite(GameObject dice, string rarity, int index) {
+    public void loadDiceSprite(GameObject dice, string rarity, int spriteNum) {
         DiceSprites diceSpritesScript = GetComponent<DiceSprites>();
         List<Sprite> SpriteList;
 
@@ -95,7 +95,7 @@ public class DiceManager : MonoBehaviour {
 
         // 위에서 적용한 리스트에서 주사위 스프라이트 불러오기
         Dice diceScript = dice.GetComponent<Dice>();
-        dice.GetComponent<SpriteRenderer>().sprite = SpriteList[index];
+        dice.GetComponent<SpriteRenderer>().sprite = SpriteList[spriteNum];
     }
 
     // 주사위 레벨(눈금)에 주사위 색상 적용

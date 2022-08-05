@@ -1092,6 +1092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 874484307}
   - component: {fileID: 874484306}
+  - component: {fileID: 874484308}
   m_Layer: 0
   m_Name: MonsterManager
   m_TagString: Untagged
@@ -1131,6 +1132,31 @@ Transform:
   m_Father: {fileID: 655801244}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &874484308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874484305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06dd0b87a2122e045894707b2fdec847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sprites:
+  - {fileID: 21300000, guid: 50845a9bb427ab847b6e9c71c8e9b528, type: 3}
+  - {fileID: 21300000, guid: 6863f013a13ea6345a45ea5047c77154, type: 3}
+  - {fileID: 21300000, guid: 28a124f2169456b41b86c7e2eb7dabaa, type: 3}
+  - {fileID: 21300000, guid: 43f121d879836364ab4562026eb74d50, type: 3}
+  - {fileID: 21300000, guid: 8fc76734ba9538d499daaaa72d71ff67, type: 3}
+  - {fileID: 21300000, guid: d739e22c8e7745f4fa7f2be6033c17fe, type: 3}
+  - {fileID: 21300000, guid: 6066fc6b4160a944487f0a448627cabb, type: 3}
+  - {fileID: 21300000, guid: 34d80165b28c3d948bd7585fec885acc, type: 3}
+  - {fileID: 21300000, guid: 3844735c75b8d774ba95178a486b47a7, type: 3}
+  - {fileID: 21300000, guid: 537a3b8849eda0343942d082c15c4f9b, type: 3}
+  - {fileID: 21300000, guid: 9d6c7e6ec95f42941b5cac27a576d98e, type: 3}
+  - {fileID: 21300000, guid: bd2a065add658df42bb4d41c3e40e983, type: 3}
 --- !u!1 &934780915
 GameObject:
   m_ObjectHideFlags: 0

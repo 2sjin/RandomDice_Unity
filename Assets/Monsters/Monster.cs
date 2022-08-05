@@ -17,6 +17,7 @@ public class Monster : MonoBehaviour {
     }
 
     private void Update() {
+        monsterManager.GetComponent<MonsterManager>().loadMonsterSprite(gameObject, 5);
         updateHpText();         // 몬스터 체력 갱신
         if (hp <= 0) die();     // 체력 없으면 사망 처리
         move();                 // 몬스터 이동
