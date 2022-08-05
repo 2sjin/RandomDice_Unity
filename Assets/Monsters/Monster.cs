@@ -48,5 +48,8 @@ public class Monster : MonoBehaviour {
         Destroy(hpText);          // HpText 오브젝트 제거
         monsterManager.GetComponent<MonsterManager>().removeMonster(gameObject);  // 몬스터 리스트에서 몬스터 제거
         player.GetComponent<Player>().sp += 10;   // SP 획득
+        if (monsterStruct.id >= 2) {
+            player.GetComponent<Player>().sp += 90;   // big 및 보스 몬스터 처치 시 추가 SP 획득
+        }
      }
 }
