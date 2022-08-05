@@ -21,13 +21,13 @@ public class Spawner : MonoBehaviour {
         if (spawnTimer >= 1.0f) {
             // 10초마다 빅 몬스터 생성 및 스폰 체력 증가
             if (increaseHpTimer >= 10.0f) {
-                monsterManager.GetComponent<MonsterManager>().addMonster(spawnHp * 5);
+                monsterManager.GetComponent<MonsterManager>().addMonster(2, spawnHp * 5);
                 spawnHp += 100;
                 increaseHpTimer = 0.0f;
             }
             // 일반 몬스터 생성
             else {
-                monsterManager.GetComponent<MonsterManager>().addMonster(spawnHp);
+                monsterManager.GetComponent<MonsterManager>().addMonster(0, spawnHp);
             }
             // 타이머 초기화
             spawnTimer = 0.0f;

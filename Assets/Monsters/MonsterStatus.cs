@@ -20,12 +20,12 @@ public class MonsterStatus : MonoBehaviour {
         // 독
         if (time >= 1.0f) {
             if (isPoison)
-                monster.hp -= (int) poisonDamage;
+                monster.monsterStruct.hp -= (int) poisonDamage;
             time = 0.0f;
         }
 
         // 얼음
         if (isFreeze)
-            monster.moveSpeed = 1 - (freezeEffect * 0.01f);
+            monster.monsterStruct.moveSpeed = 1 - (freezeEffect * 0.01f);
     }
 }

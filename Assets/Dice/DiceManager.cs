@@ -9,14 +9,14 @@ public class DiceManager : MonoBehaviour {
     public DiceInfo.DiceStruct [] deckArray = new DiceInfo.DiceStruct[5];    // 주사위 덱 정보
     public static string [] diceDataText = new string[5];   // DB에서 가져올 주사위 정보
 
-    public static int [] deckIdArray = {3, 7, 8, 9, 10}; // 로비에서 가져온 주사위 ID
+    public static int [] deckIdArray = {3, 7, 8, 9, 10}; // 로비에서 가져온 주사위 ID(초기값은 테스트용)
 
     float firstPosX = -1.1f;    // 첫 주사위의 X 좌표
     float firstPosY = -0.7f;    // 첫 주사위의 Y 좌표
     float marginX = 0.55f;   // X 간격
     float marginY = 0.55f;   // Y 간격
 
-    void Start() {
+    private void Start() {
         // 주사위 필드 배열 초기화
         for (int i=0; i<15; i++)
             diceFieldArray[i] = null;
@@ -30,7 +30,7 @@ public class DiceManager : MonoBehaviour {
         dbConnector.getDiceInfoFromDatabase(deckIdArray[4], 4);     // 성장
     }
 
-    void Update() {
+    private void Update() {
         // 덱이 비어있으면(null) DB에서 가져온 주사위 정보를 덱에 적용
         for (int i=0; i<5; i++)
             if (diceDataText[i] != null)

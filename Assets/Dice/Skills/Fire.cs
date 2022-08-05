@@ -7,7 +7,7 @@ public class Fire : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Monster") {
-            other.GetComponent<Monster>().hp -= (int) damage;
+            other.GetComponent<Monster>().monsterStruct.hp -= (int) damage;
         }
         Destroy(gameObject);
     }

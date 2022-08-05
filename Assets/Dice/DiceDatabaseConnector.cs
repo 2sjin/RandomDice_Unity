@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class DiceDatabaseConnector : MonoBehaviour {
@@ -15,7 +14,7 @@ public class DiceDatabaseConnector : MonoBehaviour {
     IEnumerator selectDiceInfo(int diceId, int deckIndex) {
         // 데이터 POST 전송
         WWWForm form = new WWWForm();
-        form.AddField("id_field", diceId.ToString());
+        form.AddField("dice_id_field", diceId.ToString());
         UnityWebRequest webRequest = UnityWebRequest.Post(selectURL, form);
         yield return webRequest.SendWebRequest();
 

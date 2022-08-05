@@ -5,8 +5,9 @@ public class Monster : MonoBehaviour {
     private GameObject player;
 
     public Vector3 direction = Vector3.zero;
-    public float moveSpeed;
-    public int hp;
+
+    public MonsterInfo.MonsterStruct monsterStruct;
+
     public GameObject hpText;
 
     private void Start() {
@@ -17,15 +18,15 @@ public class Monster : MonoBehaviour {
     }
 
     private void Update() {
-        monsterManager.GetComponent<MonsterManager>().loadMonsterSprite(gameObject, 5);
+        monsterManager.GetComponent<MonsterManager>().loadMonsterSprite(gameObject, monsterStruct.id);
         updateHpText();         // 몬스터 체력 갱신
-        if (hp <= 0) die();     // 체력 없으면 사망 처리
+        if (monsterStruct.hp <= 0) die();     // 체력 없으면 사망 처리
         move();                 // 몬스터 이동
     }
 
     // HpText 갱신 및 이동
     private void updateHpText() {
-        hpText.GetComponent<TextMesh>().text = hp.ToString();
+        hpText.GetComponent<TextMesh>().text = monsterStruct.hp.ToString();
         hpText.gameObject.transform.position = transform.position;  // HpText의 이동
     }
 
@@ -37,12 +38,12 @@ public class Monster : MonoBehaviour {
             else
                 direction = Vector3.right;  // 첫 번째 모퉁이를 만났을 때의 방향 전환
         }
-        transform.position += direction * moveSpeed * Time.deltaTime;   // 몬스터 이동
+        transform.position += direction * monsterStruct.moveSpeed * Time.deltaTime;   // 몬스터 이동
      }
 
      // 몬스터 사망 처리
      public void die() {
-        hp = 0;
+        monsterStruct.hp = 0;
         Destroy(gameObject);      // 몬스터 오브젝트 제거
         Destroy(hpText);          // HpText 오브젝트 제거
         monsterManager.GetComponent<MonsterManager>().removeMonster(gameObject);  // 몬스터 리스트에서 몬스터 제거

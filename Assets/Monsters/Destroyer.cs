@@ -8,7 +8,7 @@ public class Destroyer : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Monster") {
-            other.GetComponent<Monster>().hp = 0;
+            other.GetComponent<Monster>().monsterStruct.hp = 0;
             player.GetComponent<Player>().life -= 1;   // 하트 1 감소
         }
         if (other.tag == "Skill")

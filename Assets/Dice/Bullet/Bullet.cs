@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour {
                 diceStruct.attackDamage = UnityEngine.Random.Range(diceStruct.attackDamage, diceStruct.attackDamage*25+1);
             }
 
-            monster.hp -= (int) diceStruct.attackDamage;
+            monster.monsterStruct.hp -= (int) diceStruct.attackDamage;
             Destroy(gameObject);  // 총알 삭제
 
             // 스킬 발동
