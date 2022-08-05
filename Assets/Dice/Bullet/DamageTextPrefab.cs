@@ -19,6 +19,8 @@ public class DamageTextPrefab : MonoBehaviour {
         timer += Time.deltaTime;
         if (timer >= 0.01f) {
             transform.position += new Vector3(0, 0.005f, 0);
+            Color textColor = GetComponent<TextMesh>().color;
+            GetComponent<TextMesh>().color = new Color(textColor.r, textColor.g, textColor.b, textColor.a - 0.01f);
             timer -= 0.01f;
         }
     }

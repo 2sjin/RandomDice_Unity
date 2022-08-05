@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sortingLayerName: Default
-  sortingOrder: 2
+  sortingOrder: 4
 --- !u!114 &1171770716198254495
 MonoBehaviour:
   m_ObjectHideFlags: 0
