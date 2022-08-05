@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     private MonsterManager monsterManager;
     private SkillManager skillManager;
+    public GameObject damageTextPrefab;
     public DiceInfo.DiceStruct diceStruct;
     public int targetIndex;
 
@@ -42,6 +41,9 @@ public class Bullet : MonoBehaviour {
             }
 
             monster.monsterStruct.hp -= (int) diceStruct.attackDamage;
+            GameObject damageText = Instantiate(damageTextPrefab, monster.transform.position, Quaternion.identity);
+            damageText.GetComponent<TextMesh>().text = ((int) diceStruct.attackDamage).ToString();
+
             Destroy(gameObject);  // 총알 삭제
 
             // 스킬 발동
