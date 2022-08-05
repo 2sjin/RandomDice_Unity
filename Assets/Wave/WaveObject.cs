@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Wave : MonoBehaviour {
+public class WaveObject : MonoBehaviour {
     public int wave;
     public GameObject waveText;
 

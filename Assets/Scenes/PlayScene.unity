@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterManager: {fileID: 874484305}
-  waveObject: {fileID: 0}
+  waveObject: {fileID: 1119319798}
 --- !u!1 &949890364
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,22 +5,28 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
     public GameObject monsterManager;
     public GameObject waveObject;
+    private WaveObject waveObjectScript;
 
     private int spawnHp;                  // 몬스터 스폰될 때 체력
-    private float increaseHpTimer;        // 스폰 체력 증가 타이머
     private float [] spawnTimer = new float[3];       // 몬스터 스폰 타이머(common, speed, big)
 
     void Start() {
+        waveObjectScript = waveObject.GetComponent<WaveObject>();
         spawnHp = 100;
-        increaseHpTimer = -20.0f;
         spawnTimer[0] = 0.0f;
         spawnTimer[1] = -5.0f;
         spawnTimer[2] = -10.0f;
     }
 
     void Update() {
+        // 스폰 체력 설정
+        if (waveObjectScript.timer > 60)
+            spawnHp = 100 * waveObjectScript.wave;
+        else
+            spawnHp = 100 * waveObjectScript.wave * (6 - (int)(waveObjectScript.timer / 10));
+
+
         // 타이머를 deltaTime만큼 증가
-        increaseHpTimer += Time.deltaTime;
         for (int i=0; i<spawnTimer.Length; i++)
             spawnTimer[i] += Time.deltaTime;
 
@@ -41,13 +47,6 @@ public class Spawner : MonoBehaviour {
                 monsterManager.GetComponent<MonsterManager>().addMonster(0, spawnHp);
             }
             spawnTimer[0] = 0.0f;
-        }
-
-
-        // 10초마다 스폰 체력 증가
-        if (increaseHpTimer >= 10.0f) {
-            spawnHp += 100 * waveObject.GetComponent<Wave>().wave;
-            increaseHpTimer = 0.0f;
         }
     }
 }
