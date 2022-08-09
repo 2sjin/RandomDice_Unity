@@ -37,3 +37,59 @@ Unity로 RandomDice의 Clone 게임 개발하기
 - 주사위 릴레이션(**ID**, 이름, 등급, 이미지번호, 공격력, 공격속도, 타겟, 특수0, 특수1, 특수2, *색상명*)
 - 색상 릴레이션(**색상명**, Red, Green, Blue)
 - 몬스터 릴레이션(**ID**, 이름, 보스판정, 이동속도)
+
+### 테이블
+|테이블명|테이블|비고|
+|:-:|:-:|:-:|
+|dice|![image](https://user-images.githubusercontent.com/91407433/183569834-a7791381-39c7-4379-9bcd-798bb36e0251.png)|주사위 개체|
+|color|![image](https://user-images.githubusercontent.com/91407433/183569894-342caa9e-869f-4db6-b47a-6a33a798062b.png)|색상 개체|
+|monster|![image](https://user-images.githubusercontent.com/91407433/183569974-9d6ed179-5a5d-414e-b083-bf6e9c0dc7b9.png)|몬스터 개체|
+
+### SQL(PHP 스크립트)
+#### select_dice.php
+특정한 ID를 가진 주사위의 모든 필드를 조회한다.
+```
+<?php
+
+// POST로 전송받을 데이터
+$id_field = $_POST['dice_id_field'];
+
+// DBMS 연결을 위한 정보
+$hostname = "127.0.0.1";        // 호스트 이름
+$username = "admin";            // 사용자 이름
+$password = "1111";             // 비밀번호
+$database = "random_dice";             // 사용할 데이터베이스
+
+// DBMS 연결
+$conn = mysqli_connect($hostname, $username, $password, $database);
+
+// SQL
+$sql = "SELECT * FROM dice JOIN color ON dice.color = color.color_name WHERE di>
+
+// SQL 처리
+$result = mysqli_query($conn, $sql);
+```
+
+#### select_monster.php
+특정한 ID를 가진 몬스터의 모든 필드를 조회한다.
+```
+<?php
+
+// POST로 전송받을 데이터
+$id_field = $_POST['monster_id_field'];
+
+// DBMS 연결을 위한 정보
+$hostname = "127.0.0.1";        // 호스트 이름
+$username = "admin";            // 사용자 이름
+$password = "1111";             // 비밀번호
+$database = "random_dice";             // 사용할 데이터베이스
+
+// DBMS 연결
+$conn = mysqli_connect($hostname, $username, $password, $database);
+
+// SQL
+$sql = "SELECT * FROM monster WHERE monster_id=".$id_field.";";
+
+// SQL 처리
+$result = mysqli_query($conn, $sql);
+```
